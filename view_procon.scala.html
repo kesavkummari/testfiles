@@ -1,0 +1,1642 @@
+ @(userDetails:String)
+@import com.ge.dsv.common.util._
+<!DOCTYPE html>
+
+<html>
+  <head>
+	   <title>@Language.message("Application.name")</title>
+	    <!-- <title>Procon</title> -->
+	    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9; IE=EmulateIE10; IE=EmulateIE11" />
+		<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="@routes.Assets.at("configurator/stylesheets/bootstrap.min.css")" type="text/css" />
+		<link rel="shortcut icon" type="image/ico" href="@routes.Assets.at("configurator/images/favicon.ico")">
+		<link rel="stylesheet" media="screen" href="@routes.Assets.at("configurator/gia/common/iids/css/iids.css")">
+		<link href="@routes.Assets.at("configurator/stylesheets/apptemplate.css")" rel="stylesheet" />
+		<link href="@routes.Assets.at("configurator/stylesheets/prc_app.css")" rel="stylesheet" />
+		<!-- <link href="@routes.Assets.at("configurator/stylesheets/pdm.css")" rel="stylesheet" /> -->
+		<link href="@routes.Assets.at("configurator/stylesheets/procon.css")" rel="stylesheet" />
+		<!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"> -->
+		<link href="@routes.Assets.at("configurator/awesome-4.7.0/css/font-awesome.min.css")" rel="stylesheet"> 
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-notify/0.2.0/css/bootstrap-notify.css" rel="stylesheet">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.css" rel="stylesheet">
+		<link media="screen" href="@routes.Assets.at("configurator/stylesheets/ge_water_sso.css")" type="text/css" rel="stylesheet">
+		<link media="screen" href="@routes.Assets.at("configurator/stylesheets/mds.css")" type="text/css" rel="stylesheet">
+		<link media="screen" href="@routes.Assets.at("configurator/stylesheets/master.css")" type="text/css" rel="stylesheet">
+		<!-- css specific to IE -->
+		<!--[if IE]>
+		<link rel="stylesheet" media="screen" href="@routes.Assets.at("abmet/stylesheets/IECss.css")">
+		<![endif]-->
+		<link rel="stylesheet" href="@routes.Assets.at("configurator/stylesheets/jsplumb.css")">
+    	<link rel="stylesheet" href="@routes.Assets.at("configurator/stylesheets/prc.css")">
+    	<link rel="stylesheet" href="@routes.Assets.at("configurator/stylesheets/multiselect.css")">
+    	<link rel="stylesheet" media="screen" href="@routes.Assets.at("configurator/gia/common/iids/components/datatables/media/css/jquery.dataTables.css")">
+ 
+  </head>
+  <body class="lang-en page-node-239 path-frontpage node--type-page context-node-239">
+  
+<!--CoachMark Starts  -->
+	<div id="intro-overlay" class="intro-overlay" data-intro="" data-intro-close="">
+		<div class="intro-target target-mobile-shelf">
+	    	<span class="intro-num mobile-shelf">1</span>
+		</div>
+		<div class="intro-target target-menu-toggle" data-target=".primary-sidebar-toggle">
+		 	 <span class="intro-num menu-toggle">1</span>
+		 	 <div class="intro-arrowDiv"></div>
+			 <div class="intro-text">Start Here - You can create your new project here</div>
+		</div>
+		<div class="intro-target target-customize-store" data-target=".intro-customize">
+		    <span class="intro-num customize-store">2</span>
+	  		<div class="intro-arrowDiv"></div>
+			 <div class="intro-text">Existing projects here</div>
+		</div>
+		<div class="intro-target target-homepage" data-target=".intro-home">
+		    <span class="intro-num homepage">4</span>
+	   		<div class="intro-arrowDiv intro-arrowDivLeft" ></div>
+			 <div class="intro-text intro-textLeft">Search all projects in pE Configurator</div>
+		</div>
+		<div class="intro-target target-search" data-target=".intro-search">
+		    <span class="intro-num search-field">3</span>
+	  		<div class="intro-arrowDiv"></div>
+			 <div class="intro-text">Design files for your projects are found here</div>
+		</div>
+	</div>	
+<!--CoachMark Ends  -->
+
+  <div class="newOverlay"></div>
+  <div class="newOverlayLoader"><label>Loading...</label></div>
+  <!--Get the details from siteminder and store in local storage   -->
+	  <script type="text/javascript">
+	  	var userDetails="@(userDetails)";
+	  	localStorage.setItem("userDetails",userDetails);
+	  	var appEnv = ""
+	  	userDetails=userDetails.split("-!~");
+		var ssoId = userDetails[0];//'@session.get("ssoId")';
+		localStorage.setItem('ssoId', ssoId);
+		var firstName = userDetails[1];//'@session.get("ssoId")';
+		localStorage.setItem('fName', firstName);
+		var lastName = userDetails[2];//'@session.get("ssoId")';
+		localStorage.setItem('lName', lastName);
+		var email = userDetails[3];//'@session.get("email")';
+		localStorage.setItem('email', email);
+		var env = userDetails[4];//'@session.get("email")';
+		appEnv = userDetails[4];
+		localStorage.setItem('env', env);
+		var pathDesgnId = userDetails[5];
+		if(pathDesgnId != undefined && pathDesgnId != ""){
+			localStorage.setItem('designId', pathDesgnId);
+		}
+		userDetails=localStorage.getItem("userDetails");
+	  	if(userDetails != null){
+	  		userDetails=userDetails.split("-!~");	  		
+	  	}
+	  </script>
+	 
+	 <!-- MODAL starts -->
+ 	  <div class="modal fade">
+	 	<div class="modal-header">
+	 	<div>
+	         <button type="button" class="closeDesignButton pull-right"><span aria-hidden="true">&times;</span><span class="sr-only">Cancel</span></button>
+	         <h4 class="modal-title" data-id="">Modal title</h4>        
+	         <div class="paging oHidden casePagination">
+				<div class="pull-left">
+			 		<ul class="pagination">
+						 <li class="previous disabled"><a href="javascript:void(0)"></a></li>
+			 			 <li class="active"> <a href="javascript:void(0)">
+			 			 <strong><span id="fCount">1</span> - <span id="lCount">5</span> of <span id="tCount">10</span></strong></a></li> 
+						 <li class="next"><a href="javascript:void(0)"></a></li>
+					 </ul> 
+				</div> 
+	 		</div>
+ 		</div>
+	 	<div class="row"> 
+	 		<div class="paginationInfo">Note : Please click arrow to select next Flow conditions</div>
+ 		</div>
+      </div>
+      
+	  	<div class="modal-body">
+		  	<div class="row recoveryDiv">
+		  		<div class="col-md-6"><label>% Recovery</label><input autocomplete="new-password" type="text" class="recovery" id="" data-value="" value="" name="recovery" ></div>
+		  	</div>
+	  		<div class="modalTable">
+	  			<div class="warningMessagesDiv">
+			      	<span id="warningMsg"></span>
+    			</div>
+			  	<div class="table-responsive">
+			      	<table class="table table-bordered" id="lateralData">
+			       		<thead><tr></tr></thead>
+			        	<tbody></tbody>
+			      	</table>
+	  				<span class="info pull-right" >Click to view lateral Diagram
+	  					<span class="glyphicon glyphicon-chevron-down "></span>
+	  				</span>
+    			</div>
+    			<div class="table-responsive fluxTabData">
+			      	<table class="table table-bordered" id="fluxTableDataComp">
+			       		<thead><tr><th></th><th>&commat; Design Temperature</th><th>&commat; 20 deg C</th><th>Units</th></tr></thead>
+			        	<tbody></tbody>
+			      	</table>
+			      	<span class="info pull-right" >Back to Properties
+	  					<span class="glyphicon glyphicon-chevron-left"></span>
+	  				</span>
+    			</div>
+			    <div id="lateralDia">
+			    	
+	  				<span class="info pull-right" >Click to view lateral table
+	  					<span class="glyphicon glyphicon-chevron-up "></span>
+	  				</span>
+			    	<canvas width=400px height=400px id="lateralCanvas">your browser does not support canvas</canvas>
+				</div>
+				<div class="tabbable compPropPopup">
+					<ul class="nav nav-tabs">
+					</ul>
+					<div class="tab-content">
+					
+					</div>
+					<div class="popOverlay"></div>
+					<div class="formulaBox"></div>
+					<div class="validationMsg"></div>
+					<div class="suggestionMsg"></div>
+				</div>
+				
+				<div id="deletionWarn" class="saveModal info">
+					<div class="row">
+						<div class="col-md-12 ">
+							<h4>De-selecting a case will permanantly delete any changes to this case you have made. Do you wish to continue?</h4>
+							<button type="button" class="btn btn-default closeBtn delWarnPopup" id="deleteConfirmYes">Yes</button>
+							<button type="button" class="btn btn-default closeBtn delWarnPopup" id="deleteConfirmNo">No</button>		
+						</div>
+					</div>
+				</div>
+				<div id="saveDesModal" class="saveModal label label-info">
+					<div class="row">
+						<div class="col-md-12 ">
+							<h4>Save Design File as</h4>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4 col-sm-4">
+							<label>Please enter a Design File name :</label>
+						</div>
+						<div class="col-md-4 col-sm-4">
+							<input autocomplete="new-password" type="text" class="desName" placeholder="Name"/>
+						</div>
+						<div class="col-md-4 col-sm-4 message">
+							<label></label>
+						</div>
+						
+					</div>
+				</div>
+				<div class="info opexInfo" role="info">
+      					<p>Please ensure the correct power cost ($/kwhr) for your project. Defaults are given as a guideline only.</p>
+    			</div>
+		    	<div id="adminSendMail">
+		    		<div class="recipients">
+		    		 <label>To :</label>
+		    		 <div>
+		    		 	<input autocomplete="new-password" type="checkBox" name="admin" checked disabled="disabled">
+		    		 	<label>Admin</label>
+		    		 </div>
+		    		 <div>
+		    		 	<input autocomplete="new-password" type="checkBox" name="customer" checked disabled="disabled">
+		    		 	<label>Customers</label>
+		    		 </div>
+		    		 <div>
+		    		 	<input autocomplete="new-password" type="checkBox" name="proEngg" checked disabled="disabled">
+		    		 	<label>Process Engineers</label>
+		    		 </div>
+		    		 <div>
+		    		 	<input autocomplete="new-password" type="checkBox" name="saleEngg" checked disabled="disabled">
+		    		 	<label>Sales Engineers</label>
+		    		 </div>
+		    		 <div>
+		    		 	<input autocomplete="new-password" type="checkBox" name="comEngg" checked disabled="disabled">
+		    		 	<label>Commercial Engineers</label>
+		    		 </div>
+		    		 <div>
+		    		 	<input autocomplete="new-password" type="checkBox" name="allUsers" checked disabled="disabled">
+		    		 	<label>All Users</label>
+		    		 </div>
+		    		</div>
+		    		<div class="subject">
+		    				<label>Subject : </label>
+		    				<input autocomplete="new-password" type="text" />
+		    			</div>
+		    		<div class="msgBody">
+		    			<textarea>
+		    			</textarea>
+		    		</div>
+		    		<div class="alert" role="alert">
+      					<button type="button" class="close" data-dismiss="" aria-label=""><span aria-hidden="true">×</span></button>
+      					<p>There was a problem sending mail. Please try again later.</p>
+    				</div>
+		    	</div>
+		    	<div id="adminUpdateEq">
+		    		<div class="updateProp">
+		    			<div>
+		    				<label>Component : </label>
+			    			<select>
+			    				<option> - Please Select - </option>
+			    				<option data-propId="">Feed Source</option>
+			    				<option data-propId="">Stage 1 Feed System</option>
+			    				<option>ST1 Feed Tank</option>
+			    				<option>ST1 Feed Pump</option>
+			    				<option data-propId="">Stage 1 Biofilter</option>
+			    				<option>Stage 2 Feed System</option>
+			    				<option>ST2 Feed Tank</option>
+			    				<option>ST2 Feed Pump</option>
+			    				<option data-propId="">Stage 2 Biofilter</option>
+			    			</select>
+		    			</div>
+		    			<div>
+		    				<label>Property : </label>
+			    			<select id="propName">
+			    				<option> - Please Select - </option>
+			    				<option data-propId="p38">Carbon Bed Depth</option>
+			    				<option data-propId="p54">Minimum Tank Volume Required</option>
+			    				<option data-propId="p58">Tank Working Volume</option>
+			    				<option data-propId="p125">Hydraulic Loading Rate</option>
+			    			</select>
+		    			</div>
+		    			<div class="orgEqn">
+		    				<label> Original Equation : </label>
+		    				<span></span>
+		    			</div>
+		    		</div>
+		    		<div class="equation">
+		    			<div id="eqDiv">	
+		    				<input autocomplete="new-password" type="text" class="search" />
+		    			</div>
+		    			<ul><li class="heading subHeading">Operators</li>
+		    				<li data-propId="+"> + </li>
+		    				<li data-propId="-"> - </li>
+		    				<li data-propId="*"> * </li>
+		    				<li data-propId="/"> / </li>
+		    				<li data-propId="("> ( </li>
+		    				<li data-propId=")"> ) </li>
+		    				<li class="heading">Numbers</li>
+		    				<li data-propId="0"> 0 </li>
+		    				<li data-propId="1"> 1 </li>
+		    				<li data-propId="2"> 2 </li>
+		    				<li data-propId="3"> 3 </li>
+		    				<li data-propId="4"> 4 </li>
+		    				<li data-propId="5"> 5 </li>
+		    				<li data-propId="6"> 6 </li>
+		    				<li data-propId="7"> 7 </li>
+		    				<li data-propId="8"> 8 </li>
+		    				<li data-propId="9"> 9 </li>
+		    				<li data-propId="."> . </li>
+		    			</ul>
+		    		</div>
+		    		<label>Edited Equation : </label>
+		    		<div	id="actEquation">
+		    		</div>
+		    		<div class="selectComp">
+		    			<div class="compList">
+		    				<label>Component :</label>
+		    				<select>
+		    					<option value="">- Please select -</option>
+		    				</select>
+		    			</div>
+		    			<div class="propList">
+		    				<label>Property :</label>
+		    				<select disabled="disabled">
+		    					<option value="">- Please select -</option>
+		    				</select>
+		    				<button type="button" class="btn btn-info">Add</button>
+		    			</div>
+		    			
+		    			<div >
+		    				<label>Operators :</label>
+		    				<select>
+		    					<option data-propid="+" value="+">+ (Addition)</option>
+		    					<option data-propid="-"  value="-">- (Subtraction)</option>
+		    					<option data-propid="*"  value="*">* (Multiplication)</option>
+		    					<option data-propid="/"  value="/">/ (Division)</option>
+		    					<option data-propid="("  value="(">( (Opening brackets)</option>
+		    					<option data-propid=")"  value=")">) (Closing brackets)</option>
+		    				</select>
+		    				<button type="button" class="btn btn-info">Add</button>
+		    			</div>
+		    		</div>
+		    		<div class="alert" role="alert">
+      					<button type="button" class="closeDesign close" data-dismiss="" aria-label="">
+      					<span aria-hidden="true">×</span></button>
+      					<p>There was a problem updating equation. Please try again later.</p>
+    				</div>
+		    	</div>
+		    </div>
+		 </div>
+		 <div class="modal-footer">
+			 <div id="infoMessages" class="saveModal">
+				 	 <button type="button" class= "close" id="infoClose">×</button>
+				  	 <span></span>
+			</div>
+			<!--<div class="paging oHidden casePagination">
+				<div class="pull-left">
+			 		<ul class="pagination">
+						 <li class="previous disabled"><a href="javascript:void(0)"></a></li>
+			 			 <li class="active"> <a href="javascript:void(0)">
+			 			 <strong><span id="fCount">1</span> - <span id="lCount">5</span> of <span id="tCount">10</span></strong></a></li> 
+						 <li class="next"><a href="javascript:void(0)"></a></li>
+					 </ul> 
+				</div> 
+	 		</div> -->
+		  <!--   <button type="button" class="btn btn-default closeBtn" data-dismiss="modal">Close</button> -->
+		     <span id="trademarkText">*Trademark of SUEZ; may be registered in one or more countries.</span>
+			 <button type="button" class="btn btn-default closeDesignButton" id="backToCanvas" title="Please go back to the canvas page in order to edit the values ">Back to canvas</button>
+		     <button type="button" class="btn btn-default closeDesignButton" title="Cancel">Cancel</button>
+		     <!-- <button type="button" class="btn btn-default" id="restoreDefaults">Restore Defaults</button> -->
+		     <button type="button" class="btn btn-default popUpBtn" id="proceedBtn" title="Save and Continue">Save and Continue</button>
+		     <button type="button" class="btn btn-default popUpBtn" id="saveNCalBtn" title="Save and Canculate">Save &amp; Calculate</button>
+		     <button type="button" class="btn btn-default popUpBtn" id="adminSendBtn" title="Send">Send</button>
+		     <button type="button" class="btn btn-default popUpBtn" id="adminUpdateEqBtn" title="Update">Update</button>
+    	</div><!-- /.modal -->
+	  </div>
+	  <!--Modal ENDS  -->
+	  <!-- Contact us slider starts -->
+	<div class="contactUswhole">
+		<div class="contactUsDiv">
+			<button class="btn btn-warning contactUsBtn">Contact Us</button>
+			<form class="contactUsForm form-horizontal">
+				<label class="radio">
+				  <input autocomplete="new-password" type="radio" name="optionsRadios" id="optionsRadios1" value="1" checked="">
+						I would like to talk to a sales representative about further refining this design.
+				</label>
+				<label class="radio">
+				  <input autocomplete="new-password" type="radio" name="optionsRadios" id="optionsRadios3" value="3">
+						I am having technical difficulties with the site.
+				</label>
+				<label class="radio radioOption">
+				  <input autocomplete="new-password" type="radio" name="optionsRadios" id="optionsRadios2" value="2">
+						I have another inquiry.
+				</label>
+				<div class="control-group seleProj">
+					  <h3>Click here to select the Project and Design</h3>
+					  <div class="row fetchProLi">
+						<div class="col-md-6 col-sm-12">
+							<div class="col-md-12 designHead">
+								<label>Project Folders</label>
+							</div>
+							<div class="searchProject">
+								<input autocomplete="new-password" type="text" placeholder="Find in My Project Folders" />
+							</div>
+							<ul class="" id="fetchProjList"></ul>
+						</div>
+						<div class="col-md-6 col-sm-12 designList">
+							<div class="col-md-12 designHead">
+								<b>Design Files for </b>
+								<h4 class="projectName"></h4>
+								<i></i>
+							</div>
+							<ol id="fetchDesignLi"></ol>
+						</div>
+					</div>
+				</div>
+				<div class="control-group">
+				  <label class="control-label">Subject</label>
+				  <div class="controls">
+					<input autocomplete="new-password" type="text" id="subject">
+				  </div>
+				</div>
+				<div class="control-group">
+				  <label class="control-label" id="description">Description</label>
+				  <div class="controls">
+					<textarea rows="7" cols="50"></textarea>
+				  </div>
+				</div>
+				<div class="control-group">
+				  <div class="controls">
+					<div class="btn closeBtn">Close</div>
+					<div class="btn btn-warning cntctUs">Send</div>
+				  </div>
+				</div>
+			  </form>
+		</div>
+	</div>
+	<!-- Contact us slider ends -->
+	<!-- Header of application -->
+	<header class="navbar navbar-static-top templatecontainer">
+		<div class="navbar-inner">
+			<div class="container-fluid">
+				<!-- <a class="brand" href="javascript:void(0)">
+					<span class="ge-logo"></span>
+					<span id="0ca255f8-41b6-43f8-a485-6fbf582fba1c_brand" class="hidden-sm">@Language.message("Application.name")  
+						<small>
+							<i>@Language.message("packager.page.gelogo") </i>
+							@Language.message("packager.page.gebusiness")
+						</small>
+					</span>
+				</a> -->
+				<!-- <a class="brand" href="#"><img src="/products/assets/configurator/images/suez-water-logo-tag.svg" alt="SUEZ Water - Water Technologies &amp; Water"></a> -->
+				<a class="brand" href="#">
+					<!-- <div class="left_curve sprite"></div>
+					<div class="logo_cont">
+					<img src="/products/assets/configurator/images/logo.png" alt="SUEZ Water - Water Technologies &amp; Water">
+					</div>
+					<div class="right_curve sprite"></div> -->.
+					
+					<!-- Commented for removal of veolia logo -->
+<!-- <img src="/products/assets/configurator/images/logo.png" alt="SUEZ Water - Water Technologies &amp; Water">-->				</a>
+				<div class="pull-right topNav">
+					
+					<div class="pull-left padding15 pullMetricsLink right2"  title="Pull Metric Report">
+					  <button class="icon-arrow-down pullMetrics" type="button" id="pullMetrics"></button>
+					  <div class="pullMetricsDiv" role="menu" aria-labelledby="pullMetrics">
+					  	<div class="row"><b>Please fill below details:</b></div>
+					  	<!-- <div class="row">
+					  		<label class="col-md-4">Tech Id : </label> 
+					  		<div class="col-md-6">
+					  			<select id="metricTech">
+					  				<option value="0">--Select--</option>
+					  				<option value="1">ABMet</option>
+					  				<option value="3">1500</option>
+					  				<option value="4">700</option>
+					  				<option value="5">500</option>
+					  			</select>
+							</div>
+					  	</div> -->
+					  	<div class="row">
+					  		<label class="col-md-4">From : </label> 
+					  		<div class="col-md-6 date">
+					  			<input autocomplete="new-password" type="text" id="fromDate" name="fromDate" class="date datepicker">
+					  			<span class="dateSpan"></span>
+							</div>
+					  	</div>
+					  	<div class="row">
+					  		<label class="col-md-4">To : </label> 
+					  		<div class="col-md-6 date">
+					  			<input autocomplete="new-password" type="text" id="toDate" name="toDate" class="date datepicker">
+					  			<span class="dateSpan"></span>
+							</div>
+					  	</div>
+					  	<div><button class=" btn button downloadMetricBtn pull-right">Download</button></div>
+					  </div>
+					</div>
+					<div class="dropdown pull-left padding15 notificationLink notification-menu textOnIcon right3"  title="Notifications" >
+					  <button class="dropdown-toggle" type="button" id="notification" data-toggle="dropdown"></button>
+					  <ul class="dropdown-menu" role="menu" aria-labelledby="notification">
+						 
+					  </ul>
+					</div>
+					
+					<div class="dropdown pull-left padding15 userActionLink userMenu right4" title="User Actions">
+					    <button class="dropdown-toggle" type="button" id="userMenu" data-toggle="dropdown">
+							<i></i>
+							<span></span>
+							<b class="glyphicon glyphicon-chevron-down"></b>
+					 	</button>
+					 	<ul class="dropdown-menu" role="menu" aria-labelledby="user-menu">
+					 	     <li role="presentation">
+								<a tabindex="-1" id="loggedInUser" href="javascript:void(0)">Logged User</a>
+							</li>
+							<li role="presentation" id="getAdminConsole">
+								<a tabindex="-1" href="javascript:void(0)">Manage Users</a>
+							</li>
+							<li role="presentation" id="getAddNewUser">
+								<a tabindex="-1" href="javascript:void(0)">Add New User/s</a>
+							</li>
+							<li role="presentation" id="logout">
+								<a tabindex="-1" href="javascript:void(0)">Logout</a>
+							</li>
+						</ul>
+					</div>
+					<div class="pull-left padding15 helpLink textOnIcon right1"  title="User Manual" >
+					  <button class="dropdown icon-file" type="button" id="helpBtn" data-toggle="dropdown"></button>
+					  <ul class="dropdown-menu" role="menu" aria-labelledby="helpBtn">
+					 <li class="abmetManual" data-tech="1"><a target="_blank" href="/products/configurator/assets/fsd/Document/Internal/procon.pdf">Procon</a></li>
+					  <li class="abmetManual" data-tech="1"><a target="_blank" href="https://www.watertechnologies.com/products/oil-gas-engineered-systems">O&amp;G Products</a></li>
+				<!-- <li class="abmetManual" data-tech="1"><a target="_blank" href="https://my.suezwatertechnologies.com/WTSCustomerPortal/s/content-download?DN=FSowsCyclonixx_EN.pdf">CYCLONIXX* fact sheet</a></li>-->
+					<li class="abmetManual" data-tech="1"><a target="_blank" href="https://estore.suezwatertechnologies.com/document/document/contentdownload/?document_name=FSowsCyclonixx_EN.pdf&security=Public&language=English">CYCLONIXX* fact sheet</a></li>                      
+					<!--    <li class="abmetManual" id="gaDrawing">
+								<a tabindex="-1" href="javascript:void(0)">GA Drawings</a>
+					  </li> 
+					   <li class="abmetManual" id="pID">
+								<a tabindex="-1" href="javascript:void(0)">P&IDs</a>
+					  </li>   -->
+				<!-- 	  <li class="abmetManual" data-tech="1"><a target="_blank" href="/products/assets/configurator/Documents/T&Cs.pdf" download="T&Cs.pdf">T&Cs</a></li>  -->
+				  <li id="downloadsMenu"  class="abmetManual" data-tech="1"><a>Downloads</a></li>  
+					  
+                       </ul>
+					</div>
+					<div class=" dropdown pull-left padding15 searchText right5 " title="Search">
+						<input autocomplete="new-password" type="search" placeholder="Search All"/>
+						<span class="dropdown-toggle" data-toggle="dropdown"></span>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="searchItems" id="searchItems"></ul>
+					</div>
+					 <div class="contactus pull-left padding15 homebtn" title="Contact Form">
+                           <a href="#" style="color:#55555A !important;height: 30px;background-color:#D9D1C8 !important;" class="btn btn-info btn-lg">
+                           <span class="glyphicon glyphicon-envelope"></span></a>
+                            <div>Contact Us</div>
+                            </div>
+                           <div class="homeIcon pull-left padding15 homebtn right6" title="Home">
+					        <a href="#" class="btn btn-info btn-lg" style="height: 30px;color:#55555A !important;background-color:#D9D1C8 !important">
+                             <span  class="glyphicon glyphicon-home"></span>
+                                  </a>
+		 		         	</div>
+					<!-- <div class="homeIcon pull-left padding15 homebtn " title="Search">
+						<img src="/products/assets/configurator/images/Home_icon.png">
+					</div> -->
+				</div>
+			</div>
+		</div>
+<!-- To show browser warning for browsers other than chrome and firefox -->
+	<div class="container">
+		<div class="bg-info browserWarn">
+	
+		<!-- 
+			<h4>Unsupported browser detected. Please use <a href="https://www.google.com/chrome/browser/desktop/" target="_blank">Chrome </a> or <a href="https://www.mozilla.org/en-US/firefox/new/" target="_blank">Firefox</a>.
+			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+			</h4> -->
+				
+			<div class="revisionWarn">
+				<h4>
+				<span>A newer version of the platform is available. Pre-existing projects are in read-only mode. Click <a class="updateRevision">'Update'</a> to upgrade to the latest revision.</span>
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">x</span><span class="sr-only">Close</span></button>
+				</h4>
+			</div>
+			
+	 	 </div>
+	</div>
+	
+	 <div class="contactUsPopup hide">
+  	  <div class="moreInfoCompareMail">
+  		<div class="headerContactUs">
+  			<h3>Contact us</h3>
+  			<i class="icon-remove pull-right"></i>
+  		</div>
+  		<div class="contentContentMail">
+  			<div class="oHidden"><span class="pull-right"><sup>*</sup> Mandatory Fields</span></div>
+  			<!-- <form name="mktoForm_1404" id="mktoForm_1404" action="https://info.gewater.com/index.php/leadCapture/save" enctype="application/x-www-form-urlencoded" method="post" class="lpeRegForm formNotEmpty form-horizontal" target="hiddenFrame">
+			</form> -->
+			<!-- <form id="mktoForm_1404"></form> -->
+			<form id="mktoForm_2935"></form>
+  		</div>
+  	  </div>
+  </div>
+<!-- New POP UP -->
+<div class="projectNewPopup">
+	<div class="header">
+		<h3 class="pull-left">Alert</h3>
+		<!-- <span class="" id="close"></span> -->
+	</div>
+	<div class="body">
+		<label>You have a alert!!</label>
+	</div>
+	<div class="footer">
+		<button class="btn closeBtn loadAnotherClose  pull-right" id="newCloseBtn">OK</button>
+	</div>
+</div>
+<!-- NEW POP UP ENDS -->
+</header>
+<!-- <section id="page-content-top" class="LP">
+    <div class="row">
+      <div class="large-12 columns">
+          <div>
+		    <section class="views-element-container block-views-block-section-hero-blocks-block-3" id="block-views-block-section-hero-blocks-block-3">
+		     <div>
+		          <div>
+			          <div class="js-view-dom-id-970acb5ad2853981a1489ca7f7d2a4858284b09b20924a52f3d9d08b685e2afa"> 
+				 		  
+					</div>
+				</div>
+		      </div>
+		 	 </section>
+		  </div>
+      </div>
+    </div>
+</section> -->
+<div id="hero-front" class="container">
+	  <div class="content-wrap">
+  			 <!-- <div class="body field field-node--body field-name-body">
+    			 <h2>Welcome to Suez Water Technologies & Solutions <i>Procon Platform</i></h2>
+				 <p>Suez WTS Design Engine for your water Applications needs.</p>
+  			 </div> -->
+  			<h1 id="titleProject"><i>pE Configurator</i></h1>
+  			<div class="row browseNote">
+           		<marquee behavior="scroll" direction="right" class="browserNote"><b>This application works best using Chrome Browser</b></marquee>
+            </div>
+  			<h2 class="titleWelcome">Welcome to the SUEZ pE Configurator Configuration Tool</h2>
+  			<div class="titleDiv">
+  				<span class="titleWelcome1"><span class="titleWelcome1"><i>pE Configurator</i> allows access to SUEZ’s expertise with this on-line tool to give you 24/7 access to suit your schedule. Just enter your application details, select the appropriate customizations and let <i>pE Configurator</i> do the rest. <i>pE Configurator</i> will guide you through the required basic information and the available options in order to produce a quotation for what you need in just a few minutes. SUEZ has engineered flexibility into our products and processes to allow you to customize your product selection without compromising on quality, reliability, safety or project economics. If you need advice or a highly customized solution, please reach out directly to our SUEZ experts <span id="titleLink" class="contactus">Contact us.</span>​</span><br>
+           		<br><span class="titleWelcome1">With SUEZ login information <i>pE Configurator</i> recognizes your specific relationship with SUEZ to allow the most accurate pricing information to be shown.If you don’t have specific login credentials, please click <a id="titleLink" target="_blank" href="https://www.watertechnologies.com/kcpguest/registration">Sign Up Now.</a></span>
+  			</div>
+  			<br>
+			<div class="wrapper">
+			<div class="zoom-effect-container">
+			  <div class="image-card">
+			    <img src="/products/assets/configurator/images/img2.png"/>
+			    <div class="imgDiv">
+			      	<b>Engineering & Commercial Tools</b><br>
+			      	<span>Product Selection & Sizing, Proposals/Quotes, Fact Sheets, Specifications, Drawings.</span>
+
+ 					<!-- <ul>
+ 					<li>Product Selection & Sizing</li>
+ 					<li>Proposals/Quotes</li>
+					<li>Fact Sheets</li>
+					<li>Specifications & Drawings</li>
+ 					</ul> -->
+ 			  	</div>
+			  </div>
+			</div>
+			<div class="zoom-effect-container">
+			  <div class="image-card">
+			      <img src="/products/assets/configurator/images/img4.png"/>
+			      <div class="imgDiv">
+			      	<b>Standardized Products</b><br>
+		        	<span>Quick Delivery, Modular, Mobile, Suez Specifications & regional options.</span>
+
+ 						<!-- <ul>
+	 					<li>Quick Delivery</li>
+	 					<li>Modular</li>
+						<li>Mobile</li>
+						<li>Suez Specifications & regional options</li>
+	 					</ul> -->
+ 			      </div>
+			  </div>
+			</div>
+			<div class="zoom-effect-container">
+			  <div class="image-card">
+			      <img src="/products/assets/configurator/images/img5.png"/>
+			      <div class="imgDiv">
+			      	 <b>Spares & Support</b><br>
+		        	<span>Spare parts, Technical documents, Field services & Engineering support.</span>
+
+ 						<!-- <ul>
+	 					<li>Spare parts</li>
+	 					<li>Technical documents</li>
+						<li>Field services </li>
+						<li>Engineering support</li>
+	 					</ul> -->
+ 			      </div>
+			  </div>
+			</div>
+		</div>
+		 <hr style="margin-top: 10px;">
+		<div class="row getStartedDiv" style="text-align: center;">
+			<button class="btn orangeBtn getStartedBtn" id="getStarted" style="">Get Started</button>
+			<button class="btn orangeBtn getCanvasBtn hide" id="getCanvas" style="">Get Canvas</button>
+			<button class="btn orangeBtn getLinksBtn hide" id="getLinks" style="">Get Links</button>
+			<button class="btn orangeBtn getAddersBtn hide" id="getAdders" style="">Adders</button>
+		</div>
+		<br>
+ 		  </div>
+ 		 
+</div>  
+<!-- <div id="content-wrapper" class="LP">
+  <div class="row main-content">
+    <main id="main" class="large-12 columns" role="main">
+        <div class="region-highlighted panel callout"></div>
+        <a id="main-content"></a>
+        <section id="page-content">
+          <div>
+    		
+	  </div>
+     </section>
+   </main>
+ </div> -->
+</div>
+	<!-- This div will be filled with any pages as linked -->
+	<div class="contentholder container">
+	</div>
+	<footer id="main">
+  <div class="row">
+    <div class="large-12 columns">
+      <div class="ge-logo-wrap">
+		<span class="ge-logo-inner">
+		<!-- <img src="/products/assets/configurator/themes/custom/ge_water/images/common/logo-sticky.png" alt="SUEZ Water"> -->
+		</span>      </div>
+    </div>
+  </div>
+
+      <div class="row multiple-columns">
+
+          <div id="footer-first" class="medium-6 large-3 columns">
+          <div>
+    <nav role="navigation" aria-labelledby="block-geswaterprocesstechnologies-menu" id="block-geswaterprocesstechnologies" class="block-geswaterprocesstechnologies">
+      
+  <h2 class="block-title" id="block-geswaterprocesstechnologies-menu">Water Technologies &amp; Solutions</h2>
+  
+
+        
+              <ul class="menu">
+              <li>
+        <a href="https://www.watertechnologies.com/about-us/who-we-are" data-drupal-link-system-path="node/178">About Us</a>
+              </li>
+          <li>
+        <a href="https://www.watertechnologies.com/products" data-drupal-link-system-path="node/1238">Product Directory</a>
+              </li>
+          <li>
+        <a href="https://estore.watertechnologies.com/">eStore</a>
+              </li>
+          <li>
+        <a href="https://www.watertechnologies.com/contact-suez-expert" data-drupal-link-system-path="node/2159">Contact Us</a>
+              </li>
+          <li>
+        <a href="https://www.suez.com/en">SUEZ</a>
+              </li>
+          <li>
+        <a href="https://www.watertechnologies.com/marketing-communications" data-drupal-link-system-path="node/2273">Sign up to hear from us</a>
+              </li>
+        </ul>
+  
+
+
+  </nav>
+
+  </div>
+
+      </div>
+              <div id="footer-second" class="medium-6 large-3 columns">
+          <div>
+    <nav role="navigation" aria-labelledby="block-resources-menu" id="block-resources" class="block-resources">
+      
+  <h2 class="block-title" id="block-resources-menu">Resources</h2>
+  
+
+        
+              <ul class="menu">
+              <li>
+        <a href="https://estore.watertechnologies.com/document/document/">Document Library</a>
+              </li>
+          <li>
+        <a href="https://www.watertechnologies.com/resources/online-tools" data-drupal-link-system-path="node/544">Online Tools</a>
+              </li>
+          <li>
+        <a href="https://estore.watertechnologies.com/mooauth/actions/sendAuthorizationRequest/?relayState=https://estore.watertechnologies.com/sales/order/history/" data-drupal-link-query="{&quot;method&quot;:&quot;loadSearchPage&quot;}">Order Status</a>
+              </li>
+          <li>
+        <a href="https://www.watertechnologies.com/msds" data-drupal-link-system-path="msds">SDS Search</a>
+              </li>
+        </ul>
+  
+  </nav>
+
+  </div>
+
+      </div>
+              <div id="footer-third" class="medium-6 large-3 columns">
+          <div>
+    <nav role="navigation" aria-labelledby="block-relatedinformation-2-menu" id="block-relatedinformation-2" class="block-relatedinformation-2">
+      
+  <h2 class="block-title" id="block-relatedinformation-2-menu">Related Information</h2>
+  
+
+        
+              <ul class="menu">
+              <li>
+        <a href="https://www.watertechnologies.com/careers" data-drupal-link-system-path="node/2323">Careers</a>
+              </li>
+          <li>
+        <a href="https://www.watertechnologies.com/sites/default/files/documents/SWTS_UK_Tax_Strategy_2020.pdf" target="_blank">Tax Strategy</a>
+              </li>
+          <li>
+        <a href="https://www.watertechnologies.com/supplier-documents" data-drupal-link-system-path="node/1618">Supplier Documents</a>
+              </li>
+          <li>
+        <a href="https://www.watertechnologies.com/ehs-quality-policy" data-drupal-link-system-path="node/1853">EHS &amp; Quality Policy</a>
+              </li>
+        </ul>
+  
+
+
+  </nav>
+
+  </div>
+
+      </div>
+              <div id="footer-fourth" class="medium-6 large-3 columns">
+          <div>
+    <section id="block-connectwithus-4" class="block-connectwithus-4">
+  
+  
+      <h2 class="block-title">Connect with us</h2>
+    
+
+  
+          
+        <!--mp_trans_remove_start="ZS"-->
+		    <ul class="social-media-list">
+          <li><a class="twitter" href="https://twitter.com/suezWATERTECH"><i aria-hidden="true" class="fa fa-twitter"></i><span> Twitter</span></a></li>
+          <li><a class="youtube" href="https://www.youtube.com/channel/UCKzMJT35GirdMEYgR5SIEog "><i aria-hidden="true" class="fa fa-youtube"></i><span> YouTube</span></a></li>
+          <li><a class="linkedin" href="https://www.linkedin.com/company/suezwatertechnologies"><i aria-hidden="true" class="fa fa-linkedin"></i><span> Linkedin</span></a></li>
+        </ul>
+		    <!--mp_trans_remove_end-->
+		    <!--mp_trans_add="ZS"
+		    <p><span lang="ZH-CN">获取技术咨询及售后服务</span></p>
+		    <p><img alt="WeChat" data-align="center" data-entity-type="file" data-entity-uuid="3bbadbe5-afda-4698-84c7-b2288a57b662" src="/sites/default/files/inline-images/WeChat-suez.png"/></p>
+        -->
+      
+    
+    
+  </section>
+
+  </div>
+
+      </div>
+        </div>
+  
+</footer> 
+	<div class="navbar-fixed-bottom templatecontainer pageFooter hide" style="margin: 0px;">
+	<div class="navbar-inner">
+		<div class="container">
+			<h4 id="projectName" class="pull-left"></h4>
+			
+		</div>
+	</div>	
+   </div>
+	<div id="viewCommentsPopup" class="projectPopup">
+		<div class="row header">
+			<h3 class="pull-left">Comments</h3>
+			<span class="pull-right" id="close"></span>
+		</div>
+		<div class="row message"></div>
+		<div class="row comments">
+			<ul></ul>
+		</div>
+		<div class="row">
+			<div class="col-md-4">
+				<input autocomplete="new-password" type="checkbox" value="" id="inclCustFlag" />
+				<label for="inclCustFlag">Include Customer</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<textarea placeholder="Add Comments" rows="5" maxlength="250"></textarea>
+			</div>
+		</div>
+		<div class="row sharedWitCust">
+			<div class="col-md-12">
+          		 Note: <b>*</b>Indicates the Comments are shared with Customers.
+			</div>
+		</div>
+		<div class="row footer">
+			<button class="btn orangeBtn  pull-right" id="commentBtn">Comment</button>
+			<button class="btn closeBtn  pull-right" id="closeBtn">Close</button>
+		</div>
+	</div>
+	<div id="successMessage" class="projectPopup">
+		<div class="row header">
+			<h3 class="pull-left">Success</h3>
+			<span class="pull-right" id="close"></span>
+		</div>
+		<div class="row message"></div>
+		<div class="row footer">
+			<button class="btn loadAnotherClose closeBtn pull-right" id="closeBtn">Ok</button>
+		</div>
+	</div>
+	<div id="failureMessage" class="projectPopup">
+		<div class="row header">
+			<h3 class="pull-left">Error</h3>
+			<span class="pull-right" id="close"></span>
+		</div>
+		<div class="row message"></div>
+		<div class="row footer">
+			<button class="btn closeBtn  pull-right" id="closeBtn">Ok</button>
+		</div>
+	</div>
+	<div id="infoMessage" class="projectPopup">
+		<div class="row header">
+			<h3 class="pull-left">Info</h3>
+			<span class="pull-right" id="close"></span>
+		</div>
+		<div class="row message"></div>
+		<div class="row footer">
+			<button class="btn closeBtn  pull-right" id="closeBtn">Ok</button>
+		</div>
+	</div>
+	<div id="warnMessage" class="projectPopup">
+		<div class="row header">
+			<h3 class="pull-left">Warning</h3>
+			<span class="pull-right" id="close"></span>
+		</div>
+		<div class="row message"></div>
+		<div class="row footer">
+			<button class="btn closeBtn  pull-right" id="yesBtn">Yes</button>
+			<button class="btn closeBtn  pull-right" id="noBtn">No</button>
+		</div>
+	</div>
+	
+	<div id="suggestMessage" class="projectPopup">
+		<div class="row header" style="background-color: #8B4513;color: #F5DEB3;">
+			<h3 class="pull-left" style="color: #F5DEB3;">Suggestion</h3>
+			<span class="pull-right" id="close"></span>
+		</div>
+		<div class="row message"></div>
+		<div class="row footer">
+			<button class="btn closebtn pull-right"  id="yesBtn">Yes</button>
+			<button class="btn closebtn  pull-right"  id="noBtn">No</button>
+		</div>
+	</div>
+	
+
+	
+<div id="createDesignPopup" class="createprojectPopup">
+	<div class="row header">
+		<h3 class="pull-left">DESIGN WIZARD</h3>
+		<span class="pull-right" id="closeDesignButton"></span>
+	</div> 
+	<!-- Div to show Flux Table  -->
+	<div class="table-responsive" id="fluxTableData">
+		<div>
+			<span class="pull-left fluxTableHead">ZW1500 Flux Selection Calculator</span>
+			<span class="info pull-right showWizProp">Click to view Properties Window
+				<span class="glyphicon glyphicon-chevron-down "></span>
+			</span>
+		</div>
+      	<table class="table table-bordered" id="fluxTableDiv">
+       		<!-- <thead><tr><th></th><th>&commat; Design Temperature</th><th>&commat; 20 deg C</th><th>Units</th></tr></thead> -->
+        	<tbody></tbody>
+      	</table>
+	</div>
+	<div class="row message"></div>
+	<div class="row desgnNameOpt">
+		<div class="col-md-3 col-sm-3">
+			<label>Design File Name<sup>*</sup></label>
+			<input autocomplete="new-password" name="desName" class="notInclude" id="wizDesName" type="text">
+		</div>
+	 	<div class="col-md-3 col-sm-3">
+			<label>Technology</label>
+			<select data-value="" data-edited="N" id="tech">
+				<option value="1">ABMet</option>
+				<option value="2">Fsd</option>
+				<option value="3">ZW1500 Pressurized Ultrafiltration</option>
+				<option value="4">700B Pressurized Ultrafiltration</option>
+				<option value="5">500 MBR</option>
+				<option value="7">ZW-700B</option>
+				<option value="7">ZW-1500</option>
+			</select>
+		</div>
+		
+		<div class="col-md-3 col-sm-3">
+			<label>Units</label>
+			<select data-value="" data-edited="N" class="wizUnitSel" id="754">
+				<option value="Metric">Metric</option>
+				<option value="US Standard">US Standard</option>
+			</select>
+		</div>
+		<div class="col-md-3 col-sm-3" >
+			<label >Select Case</label>
+			<select data-value="" data-edited="N" id="selCase"><option value="1">Case 1</option></select>
+		</div>
+		
+		<!--  <div class="paging oHidden wizCasePagination pull-right col-md-3 col-sm-3">
+			<div class="pull-left">
+		 		<ul class="pagination">
+					 <li class="previous disabled"><a href="javascript:void(0)"></a></li>
+		 			 <li class="active"> <a href="javascript:void(0)">
+		 			 <strong><span id="fCount">1</span> - <span id="lCount">4</span> of <span id="tCount">10</span></strong></a></li> 
+					 <li class="next"><a href="javascript:void(0)"></a></li>
+				 </ul> 
+			</div> 
+ 		</div>
+ 		<div class="row pagingInfo"><div class="paginationInfoWizard">Note : Please click arrow to select next Flow conditions</div></div> -->
+	</div>
+	<div>
+		<!-- <div class="newOverlay"></div>
+		<div class="newOverlayLoader"></div> -->
+		<!-- <div class="row welcomeMsg"> Welcome to 1500 Design Cloud wizard. Complete the following fields to get started on your design.</div> -->
+		<div class="row" style="max-height:41px"> 
+<div class="col-md-8 col-sm-8 welcomeMsg">Welcome to 500 MBR Design Cloud wizard. Complete the following fields to get started on your design.
+</div>
+
+<div class="row paging oHidden wizCasePagination pull-right col-md-3 col-sm-3" style="display: block;height:41px">
+			<div class="pull-left" style="height:37px">
+		 		<ul class="pagination"><li class="previous disabled"><a href="javascript:void(0)"></a></li><li class="active"> <a href="javascript:void(0)"><strong><span id="fCountMod">1</span> - <span id="lCountMod">5</span> of <span id="tCountMod">8</span></strong></a></li><li class="next"><a href="javascript:void(0)"></a></li></ul> 
+			</div> 
+ 		</div>
+<div class="row pagingInfo"><div class="paginationInfoWizard" style="display: block;">Note : Please click arrow to select next Flow conditions</div></div>
+</div>
+		<div class="tabbable fsdWizardProp" style="display: block; top: 0px;">
+			<!-- <div class="bgimg"></div> -->
+			<ul class="nav nav-tabs">
+				<li class="active"><a href="#C00001id0" data-toggle="tab"><i>1</i>Settings</a></li>
+				<li class=""><a href="#C00001id1" data-toggle="tab"><i>2</i>Flux Selection</a></li>
+				<li class=""><a href="#C00001id2" data-toggle="tab"><i>3</i>Membrane Design</a></li>
+				<li class=""><a href="#C00001id3" data-toggle="tab"><i>4</i>Advanced Settings</a></li>
+				<li class=""><a href="#C00001id4" data-toggle="tab"><i>5</i>System</a></li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane active" id="C00001id0">
+					<div class="row">
+						<div class="col-md-4 col-sm-4 pull-left">
+							<label>Region</label>
+						</div>
+						<div class="col-md-5 col-sm-5 pull-left">
+							<select name="desSet" id="desSet">
+								<option value="">EMEA</option>
+								<option value="">NAM</option>
+								<option value="">Other</option>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4 col-sm-4 pull-left">
+							<label>Units</label>
+						</div>
+						<div class="col-md-5 col-sm-5 pull-left">
+							<select name="desSet" id="desSet">
+								<option value="">Metric</option>
+								<option value="">US Standard</option>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4 col-sm-4 pull-left">
+							<label>System</label>
+						</div>
+						<div class="col-md-5 col-sm-5 pull-left">
+							<select name="desSet" id="desSet">
+								<option value="">ZPAK</option>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4 col-sm-4 pull-left">
+							<label>Membrane</label>
+						</div>
+						<div class="col-md-5 col-sm-5 pull-left">
+							<input autocomplete="new-password" type="text" id="" name="EBCT" value="600">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4 col-sm-4 pull-left">
+							<label>Rack Type</label>
+						</div>
+						<div class="col-md-5 col-sm-5 pull-left">
+							<select name="desSet" id="desSet">
+								<option value="">Standard</option>
+								<option value="">Flex</option>
+								<option value="">Soft Warning</option>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4 col-sm-4 pull-left">
+							<label>Design Temperature</label>
+						</div>
+						<div class="col-md-5 col-sm-5 pull-left">
+							<input autocomplete="new-password" type="text" id="" name="EBCT" value="22">
+							<h4 class="pull-left">deg C</h4>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4 col-sm-4 pull-left">
+							<label>Flow Demand Basis</label>
+						</div>
+						<div class="col-md-5 col-sm-5 pull-left">
+							<select name="desSet" id="desSet">
+								<option value="">UF Net Permeate Flow</option>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4 col-sm-4 pull-left">
+							<label>Daily Average Flow</label>
+						</div>
+						<div class="col-md-5 col-sm-5 pull-left">
+							<input autocomplete="new-password" type="text" id="" name="EBCT" value="180">
+							<h4 class="pull-left">m3/h</h4>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4 col-sm-4 pull-left">
+							<label># Trains</label>
+						</div>
+						<div class="col-md-5 col-sm-5 pull-left">
+							<input autocomplete="new-password" type="text" id="" name="EBCT" value="2">
+						</div>
+					</div>
+				</div>
+				<div class="tab-pane" id="C00001id1">
+					<div class="row">
+						<div class="col-md-4 col-sm-4 pull-left">
+							<label>Flux Table</label>
+						</div>
+						<div class="col-md-5 col-sm-5 pull-left">
+							<select name="desSet" id="desSet">
+								<option value="">GE Internal</option>
+								<option value="">OEM</option>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4 col-sm-4 pull-left">
+							<label>Application</label>
+						</div>
+						<div class="col-md-5 col-sm-5 pull-left">
+							<select name="desSet" id="desSet">
+								<option value="">Direct Filtration</option>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4 col-sm-4 pull-left">
+							<label>Water Quality</label>
+						</div>
+						<div class="col-md-5 col-sm-5 pull-left">
+							<select name="desSet" id="desSet">
+								<option value="">0 – 25 NTU, < 6 mg/L TOC</option>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4 col-sm-4 pull-left">
+							<label>Max Available TMP</label>
+						</div>
+						<div class="col-md-5 col-sm-5 pull-left">
+							<input autocomplete="new-password" type="text" id="" name="EBCT" value="2.7586">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4 col-sm-4 pull-left">
+							<label># Maintenance Cleans per Week</label>
+						</div>
+						<div class="col-md-5 col-sm-5 pull-left">
+							<input autocomplete="new-password" type="text" id="" name="EBCT" value="7">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4 col-sm-4 pull-left">
+							<label>Is this a base loaded plant?</label>
+						</div>
+						<div class="col-md-5 col-sm-5 pull-left">
+							<input autocomplete="new-password" type="text" id="" name="EBCT" value="no">
+						</div>
+					</div>
+				</div>
+				<div class="tab-pane" id="C00001id2">
+					<div class="row">
+						<div class="col-md-4 col-sm-4 pull-left">
+							<label>Recommended Intantaneous Flux</label>
+						</div>
+						<div class="col-md-5 col-sm-5 pull-left">
+							<input autocomplete="new-password" type="text" id="" name="EBCT" value="63.5">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4 col-sm-4 pull-left">
+							<label>Recommended Recovery</label>
+						</div>
+						<div class="col-md-5 col-sm-5 pull-left">
+							<input autocomplete="new-password" type="text" id="" name="EBCT" value="93">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4 col-sm-4 pull-left">
+							<label>Recommended  Modules per Train</label>
+						</div>
+						<div class="col-md-5 col-sm-5 pull-left">
+							<input autocomplete="new-password" type="text" id="" name="EBCT" value="32">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4 col-sm-4 pull-left">
+							<label>Design Instantaneous Flux</label>
+						</div>
+						<div class="col-md-5 col-sm-5 pull-left">
+							<input autocomplete="new-password" type="text" id="" name="EBCT" value="63.5">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4 col-sm-4 pull-left">
+							<label>Design Recovery</label>
+						</div>
+						<div class="col-md-5 col-sm-5 pull-left">
+							<input autocomplete="new-password" type="text" id="" name="EBCT" value="93">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4 col-sm-4 pull-left">
+							<label>Design Modules per Train</label>
+						</div>
+						<div class="col-md-5 col-sm-5 pull-left">
+							<input autocomplete="new-password" type="text" id="" name="EBCT" value="32">
+						</div>
+					</div>
+				</div>
+				<div class="tab-pane" id="C00001id3">
+					<div class="row">
+						<div class="col-md-4 col-sm-4 pull-left">
+							<label>Do you need redundant ancilliary equipment?</label>
+						</div>
+						<div class="col-md-5 col-sm-5 pull-left">
+							<input autocomplete="new-password" type="text" id="" name="EBCT" value="no">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4 col-sm-4 pull-left">
+							<label>Is GE supplying train-dedicated feed pumps?</label>
+						</div>
+						<div class="col-md-5 col-sm-5 pull-left">
+							<input autocomplete="new-password" type="text" id="" name="EBCT" value="Yes">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4 col-sm-4 pull-left">
+							<label>Is the Backwash tank sized for…?</label>
+						</div>
+						<div class="col-md-5 col-sm-5 pull-left">
+							<select name="desSet" id="desSet">
+								<option value="">BW Only</option>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4 col-sm-4 pull-left">
+							<label>Is the CIP tank sized for…?</label>
+						</div>
+						<div class="col-md-5 col-sm-5 pull-left">
+							<select name="desSet" id="desSet">
+								<option value="">No Neutralization</option>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4 col-sm-4 pull-left">
+							<label>Do you need MIT?</label>
+						</div>
+						<div class="col-md-5 col-sm-5 pull-left">
+							<input autocomplete="new-password" type="text" id="" name="EBCT" value="No">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4 col-sm-4 pull-left">
+							<label>Daily Availability</label>
+						</div>
+						<div class="col-md-5 col-sm-5 pull-left">
+							<input autocomplete="new-password" type="text" id="" name="EBCT" value="24">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4 col-sm-4 pull-left">
+							<label>System Summary</label>
+						</div>
+						<div class="col-md-5 col-sm-5 pull-left">
+							<input autocomplete="new-password" type="text" id="" name="EBCT" value="2 Trains">
+						</div>
+					</div>
+				</div>
+				<div class="tab-pane" id="C00001id4">
+					<div class="row">
+						<div class="col-md-4 col-sm-4 pull-left">
+							<label>Suggested System</label>
+						</div>
+						<div class="col-md-5 col-sm-5 pull-left">
+							<select name="desSet" id="desSet">
+								<option value="">ZPAK-XXX</option>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4 col-sm-4 pull-left">
+							<label>System Price</label>
+						</div>
+						<div class="col-md-5 col-sm-5 pull-left">
+							<select name="desSet" id="desSet">
+								<option value="">https://progen.gewater.com/</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="popOverlay" style=""></div>
+			<div class="formulaBox"></div>
+			<div class="validationMsg"></div>
+			<div class="suggestionMsg" style=""></div>
+		</div>
+		<div class="row abmetDesSetting">
+			<div class="col-md-4 col-sm-4 pull-left leftContent">
+				<label>Settings</label>
+				<div class="row">
+					<div class="col-md-6 col-sm-6">
+						<label>Units<sup>*</sup></label>
+					</div>
+					<div class="col-md-6 col-sm-6">
+						<select name="unitCon" id="unitCon">
+							<option value="63">Metric</option>
+							<option value="64">US Standard </option>
+						</select>
+					</div>
+				</div>
+			</div>	
+			<div class="col-md-4 col-sm-4 pull-left rightContent">
+				<label></label>
+				<div class="row">
+					<div class="col-md-6 col-sm-6">
+						<label>Number of Stages<sup>*</sup></label>
+					</div>
+					<div class="col-md-6 col-sm-6">
+						<div class="stageRadio">
+							<input autocomplete="new-password" type="radio" name="stageNo" value="1" id="stageNo1" class="notInclude"><label for="stageNo1">1 stage</label>
+							<input autocomplete="new-password" type="radio" name="stageNo" value="2" id="stageNo2" checked="checked" class="notInclude"><label for="stageNo2">2 stages</label>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row newDsgnPopUpCompProp">  
+			<div class="col-md-4 col-sm-4 pull-left leftContent">
+				<label>Influent Parameters </label>
+				<div class="row">
+					<div class="col-md-6 col-sm-6" data-propId="1">
+						<label>Design Feed Flow <span></span><sup>*</sup></label>
+					</div>
+					<div class="col-md-6 col-sm-6">
+					<input autocomplete="new-password" type="text" id="" name="designFeedFlow">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6 col-sm-6" data-propId="3">
+						<label>Design Temperature <span></span><sup>*</sup></label>
+					</div>
+					<div class="col-md-6 col-sm-6">
+						<input autocomplete="new-password" type="text" id="" name="minDesignTemperature">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6 col-sm-6" data-propId="7"> 
+						<label>Nitrate (as N) <span></span><sup>*</sup></label>
+					</div>
+					<div class="col-md-6 col-sm-6">
+						<input autocomplete="new-password" type="text" id="" name="nitrate"> 
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6 col-sm-6" data-propId="19">
+						<label>Total Selenium <span></span><sup>*</sup></label>
+					</div>
+					<div class="col-md-6 col-sm-6">
+						<input autocomplete="new-password" type="text" id="" name="totalSeleium">
+					</div>
+				</div>
+					<div class="row">
+					<div class="col-md-6 col-sm-6" data-propId="15">
+						<label>TSS <span></span><sup>*</sup></label>
+					</div>
+					<div class="col-md-6 col-sm-6">
+						<input autocomplete="new-password" type="text" id="" name="inTSS">
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 col-sm-4 pull-left rightContent">
+				<label>Effluent Parameters </label>
+				<div class="row">
+					<div class="col-md-6 col-sm-6" data-propId="633">
+						<label>Total Selenium <span></span><sup>*</sup></label>
+					</div>
+					<div class="col-md-6 col-sm-6">
+						<input autocomplete="new-password" type="text" id="" name="totalSeleniumEff">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6 col-sm-6" data-propId="630">
+						<label>TSS <span></span><sup>*</sup></label>
+					</div>
+					<div class="col-md-6 col-sm-6">
+						<input autocomplete="new-password" type="text" id="" name="efTSS">
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 col-sm-4 pull-right rightContent" data-propId="428">
+				<label>Safety Factors </label>
+				<div class="row">
+					<div class="col-md-6 col-sm-6" data-propId="1">
+						<label>Safety Factor for Total EBCT<sup>*</sup> </label>
+					</div>
+					<div class="col-md-6 col-sm-6">
+					<input autocomplete="new-password" type="text" id="" name="EBCT">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">  
+		</div>
+	</div>
+	<div class="row footer">
+		<button class="btn orangeBtn  pull-right" id="createDesignBtn">Create Design File</button>
+		<button class="btn orangeBtn  pull-right" id="createDesignBtnProp"></button>
+		<button class="btn orangeBtn  pull-right" id="crtDesUpdate" title=' Click "Update" to perform calculations and to save.'>Update</button>
+		<button class="btn orangeBtn  pull-right" id="crtDesNxt" title='Click "Next" to proceed to the next tab without calculating or saving.'>Next</button>
+		<button class="btn orangeBtn  pull-right" id="crtDesgoto" title='Click "Goto Canvas" to proceed to canvas page after saving the design.'>Goto Canvas</button>
+		<button class="btn orangeBtn  pull-left" id="crtDesPrv" title='Click "Back" to proceed to the previous tab without calculating or saving.'>Back</button>
+		<div id="infoMessages" class="saveModal pull-left">
+		 	 <button type="button" class="close" id="infoClose">×</button>
+		  	 <span></span>
+		</div>
+		<!-- <button class="btn orangeBtn  pull-right" id="refreshDesignClose">Refresh Design</button> -->
+		<button class="btn orangeBtn  pull-right" id="crtDesOk" style="display:none;">OK</button>
+		<button class="btn orangeBtn  pull-right" id="closeDesignButton" title='Click "Cancel" to exit Wizard without calculating or saving.'>Cancel</button>
+		<!-- <button class="btn closeBtn  pull-right" id="createDesignClsBtn" title='Click "Close" to exit Wizard without calculating or saving.'>Close</button> -->
+	</div>
+</div>
+<div id="delegatePopup" class="projectPopup">
+	<div class="row header">
+		<h3 class="pull-left">Delete Project <b></b></h3>
+		<span class="pull-right" id="close"></span>
+	</div>
+	<div class="row message"></div>
+	<!-- <div class="row body">
+		<div class="col-md-4 col-sm-4">
+		<label>Delegate To</label>
+		</div>
+		<div class="col-md-8 col-sm-8 usersListDelegate">
+		<input autocomplete="new-password" type="text" class="userName" placeholder="User Name"/>
+		<ul></ul>
+		</div>
+	</div> -->
+	<div class="row  confirm">
+		Are you sure you want delete?
+	</div>
+	<div class="row footer">
+		<!-- <button class="btn orangeBtn  pull-right" id="delegateBtn">Delegate To</button> -->
+		<button class="btn closeBtn  pull-right" id="assignToNoneBtn">Delete Project</button>
+		<button class="btn closeBtn  pull-right" id="delegateCloseBtn">Cancel</button>
+	</div>
+
+</div>
+
+<!-- Add PopUp for Veolia -->
+<!-- <div id="pageLoad_Generic_Message" class="projectPopupOnLoad" style="display: block;">
+<div class="row header">
+<h3 class="pull-left">Info</h3>
+<span class="pull-right" id="close"></span>
+</div>
+<div class="row message" style="display: block;">
+<p style="font-size:18px;padding: 10px !important;margin-bottom: 0px !important;font-weight: bold;">
+SUEZ - Water Technologies &amp; Solutions is now part of Veolia.</p>
+</div>
+<div class="row footer">
+<button class="btn closeBtn pull-right" id="closeBtn">Ok</button>
+</div>
+</div> -->
+<!-- End PopUp for Veolia -->
+
+<div id="pdfHeader" class="container">
+	 <label>Quote Name:</label>
+	 <input type="text" id="pdfName" disabled>
+ 	 <button id="closeQuote" class="pull-right">X</button>
+</div>
+
+<div class="pdfOverlay">
+	<div id="loadPdf"></div>
+</div>
+<div class="alert alert-warning notificationAlert hide" id="hideMeAfter" role="alert">
+  <button type="button" class="closeNotification">&times;</button>
+  <strong style="padding: 5px;">Please click the update button for changes !!</strong>
+</div>
+
+<div class="hide" class="word-content" id="word-contentProcon" >
+	
+</div>
+	<!--  Add new User by Manuual -->
+<div id="addUserWithoutSSO" class="projectPopup">
+	<div class="row header">
+		<h3 class="pull-left">Add New User</h3>
+		<span class="pull-right" id="closeAddNewuserIcon"></span>
+	</div>
+	<div class="row message"></div>
+	<div class="editUserDetails">
+		<div class="row">
+			<div class="col-md-6">
+				<label class="pull-left">Email<sup>* </sup> </label>
+			</div>
+			<div class="col-md-6">
+				<input type="text" class="editEmail" id="addNewUserEmailId" >
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<label class="pull-left">First Name<sup>* </sup> </label>
+			</div>
+			<div class="col-md-6">
+				<input type="text" class="editFirstName" >
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<label class="pull-left">Last Name<sup>* </sup> </label>
+			</div>
+			<div class="col-md-6">
+				<input type="text" class="editLastName">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<label class="pull-left">User ID<sup>*</sup> </label>
+			</div>
+			<div class="col-md-6">
+				<input type="text" class="editUserSSO pull-left" id="addnewUserSSOId" readonly>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-md-6">
+				<label class="pull-left">Role<sup>*</sup></label>
+			</div>
+			<div class="col-md-6">
+				<select class="editRole" id="editRoleId"><option class="roles" value="1">Admin/Leadership</option><option class="roles" value="2">Commercial Approver</option><option class="roles" value="5">Customer</option><option class="roles" value="3">Engineer</option><option class="roles" value="6">Partner(Rep/Dist.)</option><option class="roles" value="4">Sales</option></select>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<label class="pull-left">Access Level<sup>*</sup></label>
+			</div>
+			<div class="col-md-6">
+			<input type="text" class="editAccessLevel"  value="1" readonly>
+			</div>
+		</div>
+		
+	</div>
+	<div class="row footer">
+		<button class="btn pull-right" id="saveNewUser">Save</button>
+		<button class="btn pull-right" id="closeAddNewUserBtn">Close</button>
+	</div>
+</div>
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+	<!-- <script src="@routes.Assets.at("../../ABMet/assets/gia/common/iids/components/requirejs/require.js")"></script> -->
+	<!-- <script src="@routes.Assets.at("abmet/javascripts/jszip.min.js")"></script> -->
+	<script src="@routes.Assets.at("configurator/gia/common/iids/components/requirejs/require.js")"></script>
+	<!-- <script src="@routes.Assets.at("abmet/gia/common/iids/components/jquery/jquery.js")"></script> -->
+	<script src="@routes.Assets.at("configurator/gia/workbench/js/config.js")"></script>
+	<script src="@routes.Assets.at("configurator/gia/common/iids/components/jquery/jquery.min1.12.0.js")"></script>
+	<script src="@routes.Assets.at("configurator/gia/common/iids/components/jquery/jquery-migrate-1.4.1.min.js")"></script>
+	<script src="@routes.Assets.at("configurator/javascripts/bootstrap.min.js")"></script>	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-notify/0.2.0/js/bootstrap-notify.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.0.0/pnotify.min.js"></script>
+	<script src="@routes.Assets.at("configurator/javascripts/ge.common.js")"></script>
+	<script src="@routes.Assets.at("configurator/javascripts/dsv.js")"></script>
+    <script src="@routes.Assets.at("configurator/javascripts/ge.dsv.dateUtils.js")"></script>
+    <script src="@routes.Assets.at("configurator/javascripts/jquery-ui-1.10.0.min.js")"></script>
+    <script src="@routes.Assets.at("configurator/javascripts/jspdf.debug.js")"></script>
+    <script src="@routes.Assets.at("configurator/javascripts/multiselect.min.js")"></script>
+    <script src="@routes.Assets.at("configurator/javascripts/jquery.googoose.js")"></script>
+    <script src="//app-sjg.marketo.com/js/forms2/js/forms2.min.js"></script>
+   <!--  <script src="@routes.Assets.at("abmet/javascripts/FileSaver.min.js")"></script>
+    <script src="@routes.Assets.at("abmet/javascripts/excel-gen.js")"></script>
+    <script src="@routes.Assets.at("abmet/javascripts/jsZip.min.js")"></script> -->
+ <!--   <script src="@routes.Assets.at("abmet/javascripts/jspdf.debug.js")"></script>
+   <script src="@routes.Assets.at("abmet/javascripts/faker.min.js")"></script>
+   <script src="@routes.Assets.at("abmet/javascripts/jspdf.plugin.autotable.js")"></script>-->
+   
+<!--     <script src="@routes.Assets.at("fsd/lib/jsBezier-0.6-min.js")"></script>
+<script src="@routes.Assets.at("fsd/lib/mottle-0.5.js")"></script>
+<script src="@routes.Assets.at("fsd/lib/biltong-0.2.js")"></script>
+<script src="@routes.Assets.at("fsd/src/util.js")"></script>
+<script src="@routes.Assets.at("fsd/src/browser-util.js")"></script>
+<script src="@routes.Assets.at("fsd/src/dom-adapter.js")"></script>
+<script src="@routes.Assets.at("fsd/src/jsPlumb.js")"></script>
+<script src="@routes.Assets.at("fsd/src/overlay-component.js")"></script>
+<script src="@routes.Assets.at("fsd/src/endpoint.js")"></script>
+<script src="@routes.Assets.at("fsd/src/connection.js")"></script>
+<script src="@routes.Assets.at("fsd/src/anchors.js")"></script>
+<script src="@routes.Assets.at("fsd/src/defaults.js")"></script>
+<script src="@routes.Assets.at("fsd/src/connectors-bezier.js")"></script>
+<script src="@routes.Assets.at("fsd/src/connectors-statemachine.js")"></script>
+<script src="@routes.Assets.at("fsd/src/connectors-flowchart.js")"></script>
+<script src="@routes.Assets.at("fsd/src/connector-editors.js")"></script>
+<script src="@routes.Assets.at("fsd/src/renderers-svg.js")"></script>
+<script src="@routes.Assets.at("fsd/src/renderers-vml.js")"></script>
+<script src="@routes.Assets.at("fsd/src/base-library-adapter.js")"></script>
+<script src="@routes.Assets.at("fsd/src/jquery.jsPlumb.js")"></script>  -->
+<!-- 
+<script src="@routes.Assets.at("fsd/src/jquery.jsPlumb-1.4.1-all-min.js")"></script>
+    <script src="@routes.Assets.at("fsd/src/mootools.jsPlumb-1.4.1-all-min.js")"></script>
+    <script src="@routes.Assets.at("fsd/src/yui.jsPlumb-1.4.1-all-min.js")"></script>
+ -->
+	<!-- <script src="@routes.Assets.at("fsd/src/jsPlumb-2.0.3.js")"></script>  -->
+	<script>MktoForms2.loadForm("//app-sjg.marketo.com", "742-MJD-709", 2935);</script>
+	<script type="text/javascript">
+	require.config({
+		"waitSeconds" : 90
+		});
+  		require(['jquery'/* , 'dsv','ge' */], function() {
+  			
+  			require(['procon_func'], function() {
+  				
+  				require(['procon','lateralDia','adminConsole','pcn_func'], function() {
+  					require(['pcn','pcn_calc','jspdfAutoTable'],function(){
+  						if(window.location.pathname.match('pcn')){
+  							renderView('/products/configurator/pcnHtml');
+  						}/* else if(pathDesgnId != undefined && pathDesgnId != "" && pathDesgnId != null){
+  	  						selectedProjId = pathDesgnId.split("DC")[0] 
+  	  						shareDesId = pathDesgnId;
+  	  						isExists = "Y"
+  	  						renderView('/products/designcloud/fsdHtml');
+  	  					} */else{
+  							renderView('/products/configurator/view_landingPage');					
+ 						}
+  					});
+  					
+  				});
+  			});
+			
+		});
+   </script>
+ </body>
+</html>
+ 
