@@ -1,0 +1,1640 @@
+<div class="overlay"></div>
+<div class="overlay1"></div>
+<div class="row errorContent projectPopup">
+	
+	<div class="row message"><b>You need Permission</b></div>
+	<div class="row message">Want access to pE Configurator? Please contact <span class="errorEmail"></span> to request access. </div>
+</div>
+
+  <div class="row landingPageContent hide">
+	<div class="col-md-8 col-sm-12">
+		<div class="project">
+			<div class="createProject">
+				<h3>Create New Project</h3><br>
+				<input type="hidden" id="hiddenId" />
+				<!--<a class="createProject"><i>ZW1500</i><br></a><br>
+				<a class="createProject"><i>ZW700B</i><br></a><br>-->
+			</div>
+			<div class="existingProject" id="existingProject">
+				<div class="col-md-6 col-sm-12">
+					<h3 class="existingProjectImage">My Projects</h3>
+					<div class="searchProject">
+						<input autocomplete="new-password" type="text" placeholder="Find in My Projects" />
+					</div>
+					<ul class="projectList" id="projectList"></ul>
+				</div>
+				<div class="col-md-6 col-sm-12 designList" id="designList">
+					<div class="col-md-12 designHead">
+						<div class="col-md-8 col-sm-8 projectDetail">
+							<b>Design Files For</b>
+							<h4 id="projectName"></h4>
+							<i></i>
+						</div>
+						<div class="col-md-4 col-sm-4">
+							<button class="btn pull-right createDesign">Create New Design File</button>
+							<button class=" btn pull-right hidden-md hidden-lg" id="backToProjects ">Back to Projects</button>
+						</div>
+					</div>
+					<ol id="designLi"></ol>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-4 col-sm-12">
+		<div class="comments">
+			<h3 class="notificationImage">Notifications</h3>
+			<ul id="commentsList">
+			</ul>
+			<a class='viewMoreLink'>View all notifications</a>
+		</div>
+		<div class="adminConsole">
+			<div id="updateEq">
+		      <h5>Update Equation</h5>
+		  	</div>
+		  	<div id="sendMail">
+		      <h5>E-mail Notification</h5>
+		  	</div>
+  			<div id="peAdminGlobal">
+		      <h5>PE &amp; Admin Inputs</h5>
+		  	</div>
+		</div>
+	</div>
+</div>
+
+	<div class="leftArrow arrowBox">
+		<div id="projOptions">
+			<ul>
+				<!-- <li id="delegProj"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>Delegate Project</li> -->
+				<li id="editProj"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>Edit Project</li>
+				<li id="assignToNone" class="hide"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>Delete Project</li>
+				<!-- <li id="unitConvertOpt"><span class="glyphicon glyphicon-transfer" aria-hidden="true"></span>Unit Conversion</li> -->
+			</ul>
+		</div>
+       
+	</div>
+<div id="projectPopup" class="createprojectPopup">
+	<div class="row header">
+		<h3 class="pull-left">Create New Project</h3>
+		<span class="pull-right" id="close"></span>
+	</div> 
+	<div class="row message"></div>
+	<div id="sfdcWarn" class="saveModal info" style="display: block;">
+					<div class="row">
+						<div class="col-md-12 ">
+							<h4>Project details will be overwritten with latest SFDC data - are you sure you wish to proceed?</h4>
+							<button type="button" class="btn btn-default delWarnPopup" id="sfdcConfirmYes">Yes</button>
+							<button type="button" class="btn btn-default delWarnPopup" id="sfdcConfirmNo">No</button>		
+						</div>
+					</div>
+				</div>
+	<div class="row oHidden" style="height: 460px;">
+		<div class="col-md-4 col-sm-4 pull-left leftContent">
+			<div style="margin-bottom: 10px;"><span class="projNote">Fields marked with <b>*</b> are mandatory</span></div>
+			<!-- <label>Opportunity Details-General</label> -->
+			
+			<div class="row">
+				<div class="col-md-5 col-sm-5">
+					<label>pE Configurator ID</label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<input autocomplete="new-password" disabled="disabled" type="text" id="pcnId" name="pcnId" maxlength="6">
+					 
+				</div>
+			</div>
+			
+			
+			<div class="row">
+				<div class="col-md-5 col-sm-5">
+					<label>SFDC Opportunity Number<sup>*</sup></label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<input autocomplete="new-password" type="number" id="oppNum" name="oppNum" maxlength="6"/>
+					<input type="hidden" id="oppNumHidden" name="oppNumHidden" />
+					<!-- <button class="btn orangeBtn  pull-right" id="sfdcPull">Fetch From SFDC</button> -->
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-5 col-sm-5">
+					<label>Account<sup>*</sup></label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<input autocomplete="new-password" type="text" id="accName" name="accName"/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-5 col-sm-5">
+					<label>Account Address<sup>*</sup></label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<input autocomplete="new-password" type="text" id="accAdress" name="accAdress"/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-5 col-sm-5">
+					<label>Opportunity Name<sup>*</sup></label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<input autocomplete="new-password" type="text" id="oppName" name="oppName"/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-5 col-sm-5">
+					<label>Originator<sup>*</sup></label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<input disabled="disabled" autocomplete="new-password" type="text" id="oppOwner" name="oppOwner"/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-5 col-sm-5">
+					<label>Role<sup>*</sup></label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<input disabled="disabled" autocomplete="new-password" type="text" id="roleName" name="roleName"/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-5 col-sm-5">
+					<label>Currency<sup>*</sup></label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<select id="oppAmt" name="oppAmt">
+						<option value="">--Select Currency--</option>
+					</select>
+				</div>
+			</div>
+			
+			<div class="row marginSet">
+				<div class="col-md-5 col-sm-5">
+					<label>Installation Country <sup>*</sup></label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<select id="country" name="country">
+						<option value="">--Select Country--</option>
+					</select>
+				</div>
+			</div>
+			
+			<div class="row marginSet">
+				<div class="col-md-5 col-sm-5">
+					<label>Region</label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<input autocomplete="new-password" type="text" id="regionName" name="regionName" disabled>
+				</div>
+			</div>
+			
+		</div>
+		<div class="col-md-4 col-sm-4 pull-right rightContent oppDetCom">
+			<!-- <label>Opportunity Details-Commercial</label> -->
+			<div class="row">
+				<div class="col-md-5 col-sm-5">
+					<label>Water ES Region ID</label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<input autocomplete="new-password" type="text" id="regionId" name="regionId" disabled>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-5 col-sm-5">
+					<label>Application Tier 1<sup>*</sup></label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+				<select name="appTier1" id="appTier1"  >
+						<option value="0">--Select--</option>
+						<option value="Onshore">Onshore</option>
+					  <option value="Offshore">Offshore</option>
+					</select>
+				</div>
+			</div>
+			<div class="row marginSet">
+				<div class="col-md-5 col-sm-5">
+					<label>Application Tier 2<sup>*</sup></label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<!-- <input type="text" id="offering" name="offering" value="ABMet" readonly="" disabled=""> -->
+					<select name="appTier2" id="appTier2" >
+						<option value="0">--Select--</option>
+					</select>
+				</div>
+			</div>
+			<div  class="row marginSet">
+				<div class="col-md-5 col-sm-5">
+					<label>Application Tier 3<sup>*</sup></label>
+					<!-- <label>Application Tier 3</label> -->
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<select name="appTier3" id="appTier3"   >
+						<option value="0">--Select--</option>
+					</select>
+				</div>
+			</div>
+			<div  class="row marginSet">
+				<div class="col-md-5 col-sm-5">
+					<label>Application Tier 4<sup>*</sup></label>
+					<!-- <label>Application Tier 4</label> -->
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<select name="appTier4" id="appTier4"  >
+						<option value="0">--Select--</option>
+					</select>
+				</div>
+			</div>
+			<div class="row marginSet">
+				<div class="col-md-5 col-sm-5">
+					<label>Quote Date</label>
+				</div>
+				<div class="col-md-7 col-sm-7 date">
+					<input autocomplete="new-password" type="text" id="quoteDate" name="quoteDate" disabled>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-5 col-sm-5">
+					<label>Expected Order date<sup>*</sup></label>
+				</div>
+				<div class="col-md-7 col-sm-7 date">
+					<input autocomplete="new-password" type="text" id="orderDate" name="orderDate" class="date datepicker">
+					<span></span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-5 col-sm-5">
+					<label>Vessel Description<sup>*</sup></label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<input autocomplete="new-password" type="text" id="vesselDesc" name="vesselDesc" value="None"/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-5 col-sm-5">
+					<label>Competitor(s)</label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<select id="competitors" name="competitors[]" multiple>
+					<option value="0">--Select--</option>
+					</select>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<div class="row footer">
+	    <button class="btn  pull-right" id="closeBtn">Cancel</button>
+	    <button class="btn    pull-right" id="saveProj" style="">Save</button>
+		<button class="btn    pull-right" id="saveCont">Save & Continue</button>
+		<button class="btn    pull-right" id="saveExitProj" style="">Save & Exit</button>
+		<!-- <button class="btn orangeBtn  pull-right" id="updateProj" style="">Update & Continue</button> -->
+	</div>
+   </div>
+
+   <div id="quotePopUp" class="quotePopUp" style="display:none;">
+	<div class="row header">
+		<h3 class="pull-left">Quotation</h3>
+		<span class="pull-right" id="close"></span>
+	</div> 
+	<div class="row message"></div>
+	
+	<div class="row oHidden" style="height: 430px;">
+		<div class="col-md-4 col-sm-4 pull-left leftContent">
+			<div style="margin-bottom: 10px;"><span class="projNote">Fields marked with <b>*</b> are mandatory</span></div>
+			<!-- <label>Opportunity Details-General</label> -->
+			
+			<div class="row marginSet">
+				<div class="col-md-5 col-sm-5">
+					<label>Quote Date</label>
+				</div>
+				<div class="col-md-7 col-sm-7 date">
+					<input autocomplete="new-password" type="text" id="quotationDate" name="quotationDate" disabled>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-5 col-sm-5">
+					<label>Quote Expiration Date<sup>*</sup></label>
+				</div>
+				<div class="col-md-7 col-sm-7 date">
+					<input autocomplete="new-password" type="text" id="quotationExpDate" name="quotationExpDate" class="date datepicker">
+					<span></span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-5 col-sm-5">
+					<label>SUEZ Quote Number</label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<input autocomplete="new-password" type="text" id="quoteNum" name="quoteNum" disabled>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-5 col-sm-5">
+					<label>Sales Org<sup>*</sup></label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<select id="salesOrg" name="salesOrg">
+						<option value="">--Select Sale Org--</option>
+					</select>
+				</div>
+			</div>
+			<div class="row marginSet">
+				<div class="col-md-5 col-sm-5">
+					<label>Sales Representative / Contact<sup>*</sup></label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<input autocomplete="new-password" type="text" id="salesContact" name="salesContact"/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-5 col-sm-5">
+					<label>End Customer Email<sup>*</sup></label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<input autocomplete="new-password" type="text" id="custEmail" name="custEmail"/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-5 col-sm-5">
+					<label>End Customer Phone</label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<input autocomplete="new-password" type="text" id="custPhone" name="custPhone"/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-5 col-sm-5">
+					<label>End Customer Website</label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<input autocomplete="new-password" type="text" id="custWebsite" name="custWebsite"/>
+				</div>
+			</div>
+			<!-- <div class="row" id="extListPrice">
+				<div class="col-md-5 col-sm-5">
+					<label>Extended List Price</label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<input autocomplete="new-password" type="text" disabled="disabled"  id="extListPrice" name="extListPrice"/>
+				</div>
+			</div> -->
+			 <div class="row" id="extListPrice">
+                        <div class="col-md-5 col-sm-5">
+                              <label id="extendedListPrice"></label>
+                        </div>
+                        <div class="col-md-7 col-sm-7">
+                              <input autocomplete="new-password" type="text" disabled="disabled"  id="extListPrice" name="extListPrice"/>
+                        </div>
+             </div>
+			<!-- <div class="row" id="extSellDiv">
+				<div class="col-md-5 col-sm-5">
+					<label>Approved / Extended Sell Price</label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<input autocomplete="new-password" type="text" disabled="disabled"  id="approvedExtPrice" name="approvedExtPrice"/>
+				</div>
+			</div> -->
+			<div class="row" id="extSellDiv">
+                        <div class="col-md-5 col-sm-5">
+                              <label id="approvedExtSellPrice"></label>
+                        </div>
+                        <div class="col-md-7 col-sm-7">
+                              <input autocomplete="new-password" type="text" disabled="disabled"  id="approvedExtPrice" name="approvedExtPrice"/>
+                        </div>
+            </div>
+			
+		</div>
+		<div class="col-md-4 col-sm-4 pull-right rightContent oppDetCom">
+			<!-- <label>Opportunity Details-Commercial</label> -->
+			
+			<div class="row">
+				<div class="col-md-5 col-sm-5">
+					<label>Reference<sup>*</sup></label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<input autocomplete="new-password" type="text" disabled="disabled" id="reference" name="reference"/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-5 col-sm-5">
+					<label>Sold To<sup>*</sup></label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<input autocomplete="new-password" type="text" id="soldTo" name="soldTo"/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-5 col-sm-5">
+					<label>Ship To<sup>*</sup></label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<input autocomplete="new-password" type="text" id="shipTo" name="shipTo"/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-5 col-sm-5">
+					<label>Bill To<sup>*</sup></label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<input autocomplete="new-password" type="text"  id="billTo" name="billTo"/>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-5 col-sm-5">
+					<label>Payment Terms <sup>*</sup></label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<select id="paymentTerms" name="paymentTerms">
+						<option value="">--Select Payment Terms--</option>
+					</select>
+				</div>
+			</div>
+			
+			<div class="row marginSet">
+				<div class="col-md-5 col-sm-5">
+					<label>INCO Terms <sup>*</sup></label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<select id="incoTerms" name="incoTerms">
+						<option value="">--Select Payment Terms--</option>
+					</select>
+				</div>
+			</div>
+			<div class="row marginSet">
+				<div class="col-md-5 col-sm-5">
+					<label>Currency <sup>*</sup></label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<input autocomplete="new-password" type="text" id="quoteCurr" name="quoteCurr" disabled>
+				</div>
+			</div>
+			<div class="row" style="margin-bottom: 12px;">
+				<div class="col-md-5 col-sm-5">
+					<label>Freight<sup>*</sup></label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<select name="freight" id="freight"  >
+						<option value="0">--Select Freight--</option>
+					</select>
+				</div>
+			</div>
+			<div class="row" id="disPriceVal">
+                        <div class="col-md-5 col-sm-5">
+                              <label id="discountPriceVal"></label>
+                        </div>
+                        <div class="col-md-7 col-sm-7">
+                              <input autocomplete="new-password" type="text" disabled="disabled"  id="disPriceVal" name="disPriceVal"/>
+                        </div>
+             </div>
+			<!-- <div class="row marginSet" style="margin-bottom: 10px">
+				<div class="col-md-5 col-sm-5" style="margin: -10px;left: 10px;">
+					<label>Net Price</label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					
+					<input id="netPrice" name="netPrice" style="width: 80% !important;height: 29px;margin: -2px;margin-left: 20px;margin-top: -16px;"/>
+				</div>
+			</div> -->
+			<div class="row marginSet" style="margin-bottom: 10px">
+                        <div class="col-md-5 col-sm-5" style="margin: -10px;left: 10px;">
+                          <label id="NetPriceLbl"></label>
+                              
+                        </div>
+                        <div class="col-md-7 col-sm-7">
+                              <input id="netPrice" name="netPrice" style="width: 80% !important;height: 29px;margin: -2px;margin-left: 20px;margin-top: -16px;"/>
+                        </div>
+			</div>
+
+		</div>
+
+	</div>
+	<div class="row footer">
+	   <button class="btn pull-right" id="closeBtn">Cancel</button>
+    <button class="btn pull-right" id="genQuote">Generate Quote</button>
+<button class="btn pull-right" id="downloadQuote" style="display: block;">Download Quote</button>
+<button class="btn pull-right" id="downloadSpecsheet" style="display: block;">Download Specsheet</button>
+<button class="btn pull-right" id="proposal" style="display: block;">Proposal</button>
+<button class="btn pull-right" id="appendices">Appendices</button>
+	</div>
+   </div>
+   
+   
+ <div id="sharePopup" class="projectPopup">
+	<div class="row header">
+		<h3 class="pull-left">Share for Review</h3>
+		<span class="pull-right" id="close"></span>
+	</div>
+	<div class="row message"></div>
+	<div class="row">
+		<div class="col-md-4 col-sm-4">
+			<label>Share With</label>
+		</div>
+		<div class="col-md-8 col-sm-8 usersListShare">
+			<input autocomplete="new-password" type="text" class="userName" placeholder="User Name"/>
+			<ul></ul>
+		</div>
+	</div>
+	<div class="row footer">
+		<button class="btn pull-right" id="shareBtn">Share Design File</button>
+		<button class="btn pull-right" id="closeBtn">Cancel</button>
+	</div>
+</div>
+<div id="saveDesignAsPopup" class="projectPopup">
+	<div class="row header">
+		<h3 class="pull-left">Save Design File As</h3>
+		<span class="pull-right" id="close"></span>
+	</div>
+	<div class="row message"></div>
+	<div class="row saveAsProLi">
+		<div class="col-md-6 col-sm-12">
+			<div class="col-md-12 designHead">
+				<label>Projects</label>
+			</div>
+			<div class="searchProject">
+				<input autocomplete="new-password" type="text" placeholder="Find in My Projects" />
+			</div>
+			<ul class="" id="saveAsprojList"></ul>
+		</div>
+		<div class="col-md-6 col-sm-12 designList">
+			<div class="col-md-12 designHead">
+				<b>Design Files for </b>
+				<h4 class="projectName"></h4>
+			</div>
+			<ol id="savAsDesignLi"></ol>
+		</div>
+	</div>
+	<div class="row designName">
+		<div class="col-md-6 col-sm-12">
+			<!-- <label>Name</label> -->
+		</div>
+		<div class="col-md-6 col-sm-12">
+			<label>Design File Name</label>
+			<input autocomplete="new-password" type="text" id="saveDesAs" placeholder="Name"/>
+		</div>
+	</div>
+	<div class="row footer">
+		<button class="btn pull-right" id="saveAsOptBtn">Save Design File As</button>
+		<button class="btn pull-right" id="closeBtn">Cancel</button>
+	</div>
+</div>
+
+<div id="linksPopUp" class="projectPopup">
+	<div class="row header">
+		<img id="linkImg" src="/products/assets/configurator/images/linksImage.png" alt="CYCLONIXX* Deoiling Hydrocyclone">
+		<h3 class="pull-left" style="margin-top: 4px;">CYCLONIXX* Deoiling Hydrocyclone</h3>
+		<span class="pull-right" id="close"></span>
+	</div> 
+	<div class="row oHidden linkPopUpContent">
+		<div style="text-align:center">
+			<button class="deoilerBtn compBtn" data-comp="C00001" id="deoiler">CYCLONIXX  Deoiler</button><br>
+			<!-- <button class="deoilerBtn compBtn" data-comp="C00001" id="deoilerSpares">CYCLONIXX  Deoiler Spares</button><br> -->
+		</div>
+		<br>
+		<b>Don't see what you are looking for? <a class="callContactUs">Contact us</a></b><br>
+		<span>*Trademark of SUEZ; may be registered in one or more countries.</span>
+	</div>
+	<div class="row footer">
+	    <button class="btn  pull-right" style="font-weight: bolder !important;" id="closeBtn">Cancel</button>
+	</div>
+</div>
+
+<!-- Added for Spares tab in Vertical Menu -->
+<div id="sparesPopUp" class="projectPopup">
+	<div class="row header">
+		<!-- <img id="linkImg" src="/products/assets/configurator/images/linksImage.png" alt="CYCLONIXX* Deoiling Hydrocyclone"> -->
+		<h3 class="pull-left" style="margin-top: 4px;">Spares</h3>
+		<span class="pull-right" id="close"></span>
+	</div> 
+	<div class="row oHidden linkPopUpContent">
+		<div style="text-align:center">
+		<button class="deoilerBtn compBtn" style="display: none;" data-comp="C00003" id="wHDSparespopup">Wellhead Desander Spares</button><br>	
+		<button class="deoilerBtn compBtn" style="display: none;" data-comp="C00002" id="dHSparespopup">Desander Hydrocyclone Spares</button><br>	
+		<button class="deoilerBtn compBtn" style="display: none;" data-comp="C00001" id="dSparepopup">CYCLONIXX  Deoiler Spares</button><br>
+		<button class="deoilerBtn compBtn" style="display: none;" data-comp="C00004" id="iSparespopup">Induced Gas Flotation Spares</button><br>	
+		<button class="deoilerBtn compBtn" style="display: none;" data-comp="C00005" id="nSparespopup">Nutshell Filter Spares</button><br>	
+		</div>
+		<br>
+		<b>Don't see what you are looking for? <a class="callContactUs">Contact us</a></b><br>
+		<span>*Trademark of SUEZ; may be registered in one or more countries.</span>
+	</div>
+	<div class="row footer">
+	    <button class="btn  pull-right" style="background-color: #55555A !important;font-weight: bolder !important;" id="closeBtn">Cancel</button>
+	</div>
+</div>
+<div id="downloadsPopUp" class="projectPopup">
+	<div class="row header">
+		<!-- <img id="linkImg" src="/products/assets/configurator/images/linksImage.png" alt="CYCLONIXX* Deoiling Hydrocyclone"> -->
+		<h3 class="pull-left" style="margin-top: 4px;">Downloads</h3>
+		<span class="pull-right" id="close"></span>
+	</div> 
+	<div class="row oHidden linkPopUpContent">
+		<div style="text-align:center">
+	
+		<button class="deoilerBtn GADrawingsBtn "  id="GADrawings">GA Drawings</button><br>	
+		<button class="deoilerBtn PIDsBtn "  id="PID">P&amp;IDs</button><br>
+		<br><b><a  target="_blank"  href="/products/assets/configurator/Documents/T&amp;Cs.pdf" download="T&amp;Cs.pdf" >T&amp;Cs</a></b><br>
+		
+	
+		</div>
+		
+		
+	</div>
+	<div class="row footer">
+	    <button class="btn  pull-right" style="background-color: #55555A !important;font-weight: bolder !important;" id="closeBtn">Cancel</button>
+	</div>
+</div>
+
+<div id="GADrawingsPopUp" class="projectPopup" style="width:750px;">
+	<div class="row header">
+		<h3 class="pull-left">GA Drawings</h3>
+		<span class="pull-right" id="close"></span>
+	</div> 
+	<!-- Start -->
+	<table class="table table-bordered table-striped" id="fluidPropsTable">
+<!-- 		<thead><tr><th class="flowConditionClass headerAlign" style="width: 50% !important;">Fuild Property</th><th class="unitsClass headerAlign">Units</th><th class="headerAlign" style="width: 15% !important;">Value</th><th style="background-color:white !important;border:none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th></tr></thead> -->
+		 <thead><tr><th class="flowConditionClass headerAlign" style="width: 25% !important;">Desander</th><th class="unitsClass headerAlign" style="width: 25% !important;">Deoiler</th><th class="headerAlign" style="width: 25% !important;">IGF</th><th class="headerAlign" style="width: 25% !important;">Nutshell Filter</th></tr></thead>
+		<tbody>
+		<tr>
+		<td><b><a  target="_blank"  href="/products/assets/configurator/Documents/downloads/GADrawings/desander/DES-CS-25K-GA-001.pdf" download="General Arrangement Drawing (DES-CS-25K-GA-001).pdf" >DES-CS-25K-GA-001</a></b></td>
+			<td><b><a  target="_blank"  href="/products/assets/configurator/Documents/downloads/GADrawings/deoiler/DOC-CS-05K-GA-001.pdf" download="General Arrangement Drawing (DOC-CS-05K-GA-001).pdf">DOC-CS-05K-GA-001</a></b></td>
+		<td><b><a  target="_blank"  href="/products/assets/configurator/Documents/downloads/GADrawings/igf/IGF-CS-05K-GA-001.pdf" download="General Arrangement Drawing (IGF-CS-05K-GA-001).pdf">IGF-CS-05K-GA-001</a></b></td>
+			<td><b><a  target="_blank"  href="/products/assets/configurator/Documents/downloads/GADrawings/nutshell/NSF-CS-05K-GA-001.pdf" download="General Arrangement Drawing (NSF-CS-05K-GA-001).pdf">NSF-CS-05K-GA-001</a></b></td>
+		
+		</tr>
+		<tr>
+		<td></td>
+		<td><b><a  target="_blank"  href="/products/assets/configurator/Documents/downloads/GADrawings/deoiler/DOC-CS-10K-GA-001.pdf" download="General Arrangement Drawing (DOC-CS-10K-GA-001).pdf" >DOC-CS-10K-GA-001</a></b></td>
+		<td><b><a  target="_blank"  href="/products/assets/configurator/Documents/downloads/GADrawings/igf/IGF-CS-10K-GA-001.pdf" download="General Arrangement Drawing (IGF-CS-10K-GA-001).pdf" >IGF-CS-10K-GA-001</a></b></td>
+		<td><b><a  target="_blank"  href="/products/assets/configurator/Documents/downloads/GADrawings/nutshell/NSF-CS-10K-GA-001.pdf" download="General Arrangement Drawing (NSF-CS-10K-GA-001).pdf" >NSF-CS-10K-GA-001</a></b></td>
+		
+		</tr>
+		<tr>
+		<td></td>
+		<td><b><a  target="_blank"  href="/products/assets/configurator/Documents/downloads/GADrawings/deoiler/DOC-CS-25K-GA-001-1.pdf" download="General Arrangement Drawing (DOC-CS-25K-GA-001-1).pdf" >DOC-CS-25K-GA-001-1</a></b></td>
+		<td><b><a  target="_blank"  href="/products/assets/configurator/Documents/downloads/GADrawings/igf/IGF-CS-25K-GA-001.pdf" download="General Arrangement Drawing (IGF-CS-25K-GA-001).pdf" >IGF-CS-25K-GA-001</a></b></td>
+		<td><b><a  target="_blank"  href="/products/assets/configurator/Documents/downloads/GADrawings/nutshell/NSF-CS-25K-GA-001.pdf" download="General Arrangement Drawing (NSF-CS-25K-GA-001).pdf" >NSF-CS-25K-GA-001</a></b></td>
+		
+		</tr>
+		<tr>
+		<td></td>
+		<td><b><a  target="_blank"  href="/products/assets/configurator/Documents/downloads/GADrawings/deoiler/DOC-CS-25K-GA-001-2.pdf" download="General Arrangement Drawing (DOC-CS-25K-GA-001-2).pdf" >DOC-CS-25K-GA-001-2</a></b></td>
+		<td></td>
+		<td><b><a  target="_blank"  href="/products/assets/configurator/Documents/downloads/GADrawings/nutshell/NSF-CS-50K-GA-001.pdf" download="General Arrangement Drawing (NSF-CS-50K-GA-001).pdf" >NSF-CS-50K-GA-001</a></b></td>
+		
+		</tr>
+		
+		<tr>
+		<td></td>
+		<td><b><a  target="_blank"  href="/products/assets/configurator/Documents/downloads/GADrawings/deoiler/DOC-CS-50K-GA-001-1.pdf" download="General Arrangement Drawing (DOC-CS-50K-GA-001-1).pdf" >DOC-CS-50K-GA-001-1</a></b></td>
+		<td></td>
+		<td></td>
+		
+		</tr>
+		
+		
+		<tr>
+		<td></td>
+		<td><b><a  target="_blank"  href="/products/assets/configurator/Documents/downloads/GADrawings/deoiler/DOC-CS-50K-GA-001-2.pdf" download="General Arrangement Drawing (DOC-CS-50K-GA-001-2).pdf">DOC-CS-50K-GA-001-2</a></b></td>
+		<td></td>
+		<td></td>
+		
+		</tr>
+		</tbody>
+	</table>
+	<!-- End -->
+	 <div class="row oHidden">
+		<div>
+			<div style="margin-bottom: 10px;"><span class="projNote">Note:Please click on hyperlink text to download GA Drawings document</span></div>
+		</div>  
+	</div>	
+	<div class="row footer" id="reviewMessages">
+	    <button class="btn   pull-right" id="closeBtn">Cancel</button>
+	
+		<span></span>
+	</div>
+</div>
+
+<!-- Joby end -->
+<!--  Joby start -->
+<div id="PIDsPopUp" class="projectPopup" >
+	<div class="row header">
+		<h3 class="pull-left">P&amp;IDs</h3>
+		<span class="pull-right" id="close"></span>
+	</div> 
+
+		<!-- Start -->
+	<table class="table table-bordered table-striped" id="PIDsPopUpfluidProps">
+
+		 <thead><tr><th class="flowConditionClass headerAlign" style="width: 100% !important;">P&amp;IDs</th></tr></thead>
+		<tbody>
+	
+		
+	
+		
+		
+		</tbody>
+	</table>
+	<!-- End -->
+		 <div class="row oHidden">
+		<div>
+			<div style="margin-bottom: 10px;"><span class="projNote">Note:Please click on hyperlink text to download P&amp;IDs  document</span></div>
+		</div>  
+	</div>	
+
+	<div class="row footer" id="reviewMessages">
+	    <button class="btn   pull-right" id="closeBtn">Cancel</button>
+	
+		<span></span>
+	</div>
+</div>
+
+<!-- Joby end -->
+<!-- Added for Scope tab in Vertical Menu -->
+<div id="scopePopUp" class="projectPopup">
+	<div class="row header">
+		<!-- <img id="linkImg" src="/products/assets/configurator/images/linksImage.png" alt="CYCLONIXX* Deoiling Hydrocyclone"> -->
+		<h3 class="pull-left" style="margin-top: 4px;">Scope</h3>
+		<span class="pull-right" id="close"></span>
+	</div> 
+	<div class="row oHidden linkPopUpContent">
+		<div style="text-align:center">
+			<button class="deoilerBtn compBtn" style="display: none;" data-comp="C00003" id="whd">Wellhead Desander</button><br>	
+			<button class="deoilerBtn compBtn" style="display: none;" data-comp="C00002" id="desander">Desander Hydrocyclone</button><br>			
+			<button class="deoilerBtn compBtn deoilerA" data-comp="C00001" id="deoiler" style="display: none;" >CYCLONIXX  Deoiler</button><br>
+			<button class="deoilerBtn compBtn" style="display: none;" data-comp="C00004" id="igf">Induced Gas Flotation</button><br>
+			<button class="deoilerBtn compBtn" style="display: none;" data-comp="C00005" id="nsf">Nutshell Filter</button><br>	
+		</div>
+		<br>
+		<b>Don't see what you are looking for? <a class="callContactUs">Contact us</a></b><br>
+		<span>*Trademark of SUEZ; may be registered in one or more countries.</span>
+	</div>
+	<div class="row footer">
+	    <button class="btn  pull-right" style="background-color: #55555A !important;font-weight: bolder !important;" id="closeBtn">Cancel</button>
+	</div>
+</div>
+
+<!-- IGF -->
+<div id="igfPopUp" class="projectPopup">
+	<div class="row header">
+		<img id="linkImg" src="/products/assets/configurator/images/IGF_DGF.png" alt="Induced Gas Flotation">
+		<h3 class="pull-left" style="margin-top: 4px;">Induced Gas Flotation</h3>
+		<span class="pull-right" id="close"></span>
+	</div> 
+	<div class="row oHidden linkPopUpContent">
+		<div style="text-align:center">
+			<button class="deoilerBtn compBtn" data-comp="C00004" id="igf">Induced Gas Flotation</button><br>
+			<!-- <button class="deoilerBtn compBtn" data-comp="C00004" id="igfSpares">Induced Gas Flotation Spares</button><br>  -->
+		</div>
+		<br>
+		<b>Don't see what you are looking for? <a class="callContactUs">Contact us</a></b><br>
+		<span>*Trademark of SUEZ; may be registered in one or more countries.</span>
+	</div>
+	<div class="row footer">
+	    <button class="btn  pull-right" style="background-color: #55555A !important;font-weight: bolder !important;" id="closeBtn">Cancel</button>
+	</div>
+</div>
+
+<!-- NSF -->
+<div id="nsfPopUp" class="projectPopup">
+	<div class="row header">
+		<img id="linkImg" src="/products/assets/configurator/images/NutshellFilter.png" alt="Induced Gas Flotation">
+		<h3 class="pull-left" style="margin-top: 4px;">Nutshell Filter</h3>
+		<span class="pull-right" id="close"></span>
+	</div> 
+	<div class="row oHidden linkPopUpContent">
+		<div style="text-align:center">
+			<button class="deoilerBtn compBtn" data-comp="C00005" id="nsf">Nutshell Filter</button><br>
+		</div>
+		<br>
+		<b>Don't see what you are looking for? <a class="callContactUs">Contact us</a></b><br>
+		<span>*Trademark of SUEZ; may be registered in one or more countries.</span>
+	</div>
+	<div class="row footer">
+	    <button class="btn  pull-right" style="background-color: #55555A !important;font-weight: bolder !important;" id="closeBtn">Cancel</button>
+	</div>
+</div>
+<div id="desanderPopUp" class="projectPopup">
+	<div class="row header">
+		<img id="linkImg" src="/products/assets/configurator/images/DesandingHydrocyclone.png" alt="DesandingCyclone">
+		<h3 class="pull-left" style="margin-top: 4px;">Desander Hydrocyclone</h3>
+		<span class="pull-right" id="close"></span>
+	</div> 
+	<div class="row oHidden linkPopUpContent">
+		<div style="text-align:center">
+			<button class="deoilerBtn compBtn" data-comp="C00002" id="desander">Desander Hydrocyclone</button><br>
+		</div>
+		<br>
+		<b>Don't see what you are looking for? <a class="callContactUs">Contact us</a></b><br>
+		<span>*Trademark of SUEZ; may be registered in one or more countries.</span>
+	</div>
+	<div class="row footer">
+	    <button class="btn  pull-right" style="background-color: #55555A !important;font-weight: bolder !important;" id="closeBtn">Cancel</button>
+	</div>
+</div>
+<div id="contactFormPopUp" class="contactPopUp projectPopup">
+	<div class="row header">
+		<h3 class="pull-left">Contact Us</h3>
+		<span class="pull-right" id="close"></span>
+	</div> 
+	<div class="row message"></div>
+	
+	<div class="row oHidden" style="height: 385px;">
+		<div class="col-md-4 col-sm-4 pull-left leftContent">
+			<div style="margin-bottom: 10px;"><span class="projNote">Fields marked with <b>*</b> are mandatory</span></div>
+			<div class="row">
+				<div class="col-md-5 col-sm-5">
+					<label>First Name:<sup>*</sup></label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<input autocomplete="new-password" type="text" id="firstName" name="firstName">
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-5 col-sm-5">
+					<label>Last Name:<sup>*</sup></label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<input autocomplete="new-password" type="text" id="lastName" name="lastName">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-5 col-sm-5">
+					<label>Company:<sup>*</sup></label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<input autocomplete="new-password" type="text" id="companyName" name="companyName">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-5 col-sm-5">
+					<label>Email Address:<sup>*</sup></label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<input autocomplete="new-password" type="text" id="emailAdd" name="emailAdd">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-5 col-sm-5">
+					<label>Phone:<sup>*</sup></label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<input autocomplete="new-password" type="text" id="phoneNumber" name="phoneNumber">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-5 col-sm-5">
+					<label>Industry:</label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<select id="industry" name="industry">
+						<option value="0">Select...</option>
+						<option value="Automotive">Automotive &nbsp;</option>
+						<option value="Chemical Processing">Chemical Processing </option>
+						<option value="Commercial &amp; Institutional">Commercial &amp; Institutional </option>
+						<option value="Food &amp; Beverage">Food &amp; Beverage</option>
+						<option value="General Manufacturing">General Manufacturing &nbsp;</option>
+						<option value="Microelectronics">Microelectronics </option>
+						<option value="Mining">Mining</option>
+						<option value="Municipal/Government">Municipal/Government</option>
+						<option value="Petrochemicals">Petrochemicals</option>
+						<option value="Pharmaceutical">Pharmaceutical</option>
+						<option value="Power">Power </option>
+						<option value="Primary Metals/Steel/Aluminum">Primary Metals/Steel/Aluminum </option>
+						<option value="Pulp &amp; Paper">Pulp &amp; Paper &nbsp;</option>
+						<option value="Refining">Refining </option>
+						<option value="Unconventional Fuels">Unconventional Fuels </option>
+						<option value="Upstream Oil &amp; Gas">Upstream Oil &amp; Gas&nbsp; </option>
+					</select>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-5 col-sm-5">
+					<label>Country/Territory:<sup>*</sup></label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<select id="countryTerr" name="countryTerr">
+						<option value="">--Select...--</option>
+					</select>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-5 col-sm-5">
+					<label>Comments<sup>*</sup></label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<textarea id="comments" name="comments" placeholder="Please provide more details on your project or application.For example: flow rate, water source, location, etc." rows="4" maxlength="2000"  style="width: 218px;"></textarea>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 col-sm-12">
+					<label>Are you currently using or have you used one of our products?</label>
+					<input name="question1" id="question1" type="checkbox" value="no">	
+				</div>	
+			</div>
+			<div class="row">
+				<div class="col-md-12 col-sm-12">
+					<label>I consent to the processing of the personal data that I provide SUEZ Water Technologies & Solutions and I would like to receive marketing, event invitations, training invitations, customer service, and other communications in accordance with the Privacy Policy. Please note, consent can be withdrawn at any time by clicking here.</label>
+					<input name="question2" id="question2" type="checkbox" value="no">
+				</div>		
+			</div>
+		</div>
+	</div>
+	<div class="row footer">
+	    <button class="btn pull-right" id="closeBtn">Cancel</button>
+		<button class="btn pull-right" id="submitContactBtn">Submit</button>
+		<span></span>
+	</div>
+</div>
+
+<div id="viewMorePopUp" class="projectPopup">
+	<div class="row header">
+		<h3 class="pull-left" style="margin-top: 4px;">View All</h3>
+		<span class="pull-right" id="close"></span>
+	</div> 
+	<div class="row oHidden viewMorePopUpContent">
+		<div class="viewAll oHidden viewAllSearch">
+		<div class="viewMore">
+			<ul class="viewMoreList" ></ul>
+			<div class="paging oHidden">
+				<div class="pull-left">
+			 		<ul class="pagination">
+						 <li class="previous disabled"><a href="javascript:void(0)"></a></li>
+			 			 <li class="active"> <a href="javascript:void(0)">
+			 			 <strong><span id="fCount">1</span> - <span id="lCount">10</span> of <span id="tCount"></span></strong></a></li> 
+						 <li class="next"><a href="javascript:void(0)"></a></li>
+					 </ul> 
+				</div> 
+		 	</div>
+		</div>
+	</div>
+	</div>
+	<div class="row footer">
+	    <button class="btn   pull-right" style="background-color: #87aad0 !important;font-weight: bolder !important;" id="closeBtn">Cancel</button>
+	</div>
+</div>
+
+
+<div id="viewMoreNtfcPopUp" class="projectPopup">
+	<div class="row header">
+		<h3 class="pull-left" style="margin-top: 4px;">View All Notifications</h3>
+		<span class="pull-right" id="close"></span>
+	</div> 
+	<div class="row oHidden viewAllNotiPopUpContent">
+		<div class="viewAll oHidden viewAllNoti">
+		<div class="viewMore">
+			<ul class="viewMoreList" style="margin-left: 0px;"></ul>
+		</div>
+	</div>
+	</div>
+	<div class="row footer">
+	    <button class="btn   pull-right" style="background-color: #87aad0 !important;font-weight: bolder !important;" id="closeBtn">Cancel</button>
+	</div>
+</div>
+<!-- List Of Users -->
+
+<div id="userManagementPopUp" class="projectPopup1">
+	<div class="row header">
+		<h3 class="pull-left">User Access Management</h3>
+		<span class="pull-right" id="closeBtn"></span>
+	</div>
+	<div class="" id="adminConsoleContent">
+		<div class="row userAccessoptions">
+  		
+  		<div class="row message pull-left">
+  			<button type="button" class="close adminInfoClose">x</button>
+  			<p></p>
+  		</div>
+  	</div>
+	<div class="row userAccessoptionsIcons">
+			<i class="icon-trash pull-right" title="Delete Selected users"></i>
+	 		<i class="icon-arrow-down pull-right" title="Deactivate Selected users" id="deactivateUserIcon"></i>
+			<i class="icon-arrow-up pull-right" title="Activate Selected User/s" id="activateUserIcon"></i>
+			<i class="icon-plus pull-right" title="Add New User/s" id="addNewUser"></i>
+			<i class="icon-search pull-right" title="Search" id="searchUser"></i>
+			<span class="pull-right">
+				<input type="text" class="searchUsers" placeholder="Search Users">
+			</span>
+			<p class="pull-left">Existing Users List</p>
+		</div>
+		<table id="userManagementTable" class="dataTable table table-bordered table-striped"> 
+			<thead><tr><th><input type='checkbox' class="selectAllusers"></th><th>User Id</th><th>First Name</th><th>Last Name</th><th>Email</th><th>Role</th><th>Access Level</th><th>User Status</th><th></th></tr></thead>
+			<tbody class="">
+				
+			</tbody>
+		</table>
+		<div class="pagingTbl oHidden">
+			<div class="pull-left">
+		 		<ul class="pagination">
+					 <li class="previous disabled"><a href="javascript:void(0)"></a></li>
+		 			 <li class="active"> <a href="javascript:void(0)">
+		 			 <strong><span id="fCount">1</span> - <span id="lCount">15</span> of <span id="tCount"></span></strong></a></li> 
+					 <li class="next"><a href="javascript:void(0)"></a></li>
+				 </ul> 
+			</div> 
+		 </div>
+	</div>
+</div>
+
+
+<!-- Edit  User Popup-->
+<div id="editUserPopup" class="projectPopup">
+	<div class="row header">
+		<h3 class="pull-left">Edit User</h3>
+		<span class="pull-right editCloseBtn" id="closeBtn"></span>
+	</div>
+	<div class="row message"></div>
+	<div class="editUserDetails">
+		<div class="row">
+			<div class="col-md-6">
+				<label class="pull-left">User ID : </label>
+			</div>
+			<div class="col-md-6">
+				<input type="text" class="editUserSSO pull-left" readonly="">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<label class="pull-left">First Name : </label>
+			</div>
+			<div class="col-md-6">
+				<input type="text" class="editFirstName" readonly="">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<label class="pull-left">Last Name : </label>
+			</div>
+			<div class="col-md-6">
+				<input type="text" class="editLastName" readonly="">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<label class="pull-left">Email : </label>
+			</div>
+			<div class="col-md-6">
+				<input type="text" class="editEmail" readonly="">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<label class="pull-left">Role : </label>
+			</div>
+			<div class="col-md-6">
+				<select class="editRole" id="editRoleId"></select>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<label class="pull-left">Access Level</label>
+			</div>
+			<div class="col-md-6">
+			<input type="text" class="editAccessLevel" readonly="">
+			</div>
+		</div>
+		
+	</div>
+	<div class="row footer">
+		<button class="btn pull-right" id="editUserBtn">Save</button>
+		<button class="btn pull-right" id="closeBtn">Close</button>
+	</div>
+</div>
+<!-- Edit  User Popup-->
+<!-- Add User(s) Popup -->
+<div id="addUserPopup" class="projectPopup">
+	<div class="row header">
+		<h3 class="pull-left">Add User</h3>
+		<span class="pull-right editCloseBtn" id="close"></span>
+	</div>
+	<div class="row message"></div>
+	<div class="addUserDetails">
+		 <!-- To show Tech List -->
+			<div class="arrowBox arrowUp">
+				<div class="row">
+		  			<input type="checkbox" value="1" id="tech1" name="tech1">
+					<label for="tech1">pE Configurator</label>
+				</div>
+			</div>
+		  <div class="row">
+			   <label class="pull-left">Search User Id(s)</label>
+			   <div style="margin: 0;position: relative;float: left;">
+			   		<input type="text" placeholder="Search SSO(s)" class="searchSSos pull-left">
+			   		<b class="icon-search"></b>
+			   </div>
+			   <button class="pull-left btn orangeBtn searchSsoBtn">Fetch</button>
+		  </div>
+		  <span class="searchSepNote">Note:  comma character (,) typically separates each field of text </span>
+		  <div class="addUserTableDiv">
+		  	<table class="dataTable table table-bordered table-striped">
+		         <thead>
+		         	<tr><th>User ID</th><th>First Name</th><th>Last Name</th><th>Email</th><th>Role</th><th>Access Level</th><th>Status</th><th></th></tr>
+		         </thead>
+				<tbody>
+		 			<tr><td class="disabled">User ID</td><td class="disabled">First Name</td><td class="disabled">Last Name</td><td class="disabled">Email</td><td class="disabled">Commercial Engineer</td><td class="disabled">3</td><td class="disabled">New user</td><td class="disabled"><a class="icon-trash disabled" title="Remove User"></a></td></tr>
+				</tbody>
+		 	</table>
+		  </div>
+	</div>
+	<div class="row footer">
+		<button class="btn pull-right" id="addUserBtn">Add user(s)</button>
+		<button class="btn pull-right" id="closeBtn">Close</button>
+	</div>
+</div>
+<!-- Add User(s) Popup -->
+<!-- Delete User(s) Popup -->
+<div id="delUserPopup" class="projectPopup">
+	<div class="row header">
+		<h3 class="pull-left">Delete User</h3>
+		<span class="pull-right editCloseBtn" id="close"></span>
+	</div>
+	<div class="row message"></div>
+	<div class="delUserDetails">
+		  <div class="delUserTableDiv">
+		  	<table class="dataTable table table-bordered table-striped">
+		         <thead>
+		         	<tr><th>User ID</th><th>First Name</th><th>Last Name</th><th>Status</th></tr>
+		         </thead>
+				<tbody>
+		 			<tr><td class="disabled">User ID</td><td class="disabled">First Name</td><td class="disabled">Last Name</td><td class="disabled">New user</td></tr>
+				</tbody>
+		 	</table>
+		  </div>
+	</div>
+	<div class="row footer">
+		<button class="btn pull-right" id="closeBtn">Ok</button>
+	</div>
+</div>
+<!-- Delete User(s) Popup -->
+
+<!-- Show User Projects Popup -->
+<div id="showUserProj" class="projectPopup">
+	<div class="row header">
+		<h3 class="pull-left">Projects</h3>
+		<span class="pull-right" id="close"></span>
+	</div>
+	<div class="row message"></div>
+	<div class="row row saveAsProLi">
+		<div class="col-md-6 col-sm-12">
+			<div class="col-md-12 designHead">
+				<label>Project Folders</label>
+			</div>
+			<div class="searchProject">
+				<input type="text" placeholder="Find in Project Folders" />
+			</div>
+			<ul class="" id="showprojList"></ul>
+		</div>
+		<!-- <div class="col-md-6 col-sm-12 designList">
+			<div class="col-md-12 designHead">
+				<b>Design Files for </b>
+				<h4 class="projectName"></h4>
+			</div>
+			<ol id="showprojDesLi"></ol>
+		</div> -->
+	</div>
+	<div class="row footer">
+		<button class="btn closeBtn  pull-right" id="closeBtn">Cancel</button>
+	</div>
+</div>
+<!-- Show User Projects Popup -->
+<!-- Warnings on Admin console page -->
+<div id="infoMessagePopup" class="projectPopup">
+	<div class="row header">
+		<h3 class="pull-left">Alert</h3>
+		<span class="pull-right" id="close"></span>
+	</div>
+	<div class="row message"></div>
+	<div class="row footer">
+		<button class="btn  pull-right" id="yesBtn">Yes</button>
+		<button class="btn closeBtn  pull-right" id="noBtn">No</button>
+	</div>
+</div>
+<div id="infoMessagePopupSubmit" class="projectPopup">
+	<div class="row header">
+		<h3 class="pull-left">Alert</h3>
+		<span class="pull-right" id="close"></span>
+	</div>
+	<div class="row message"></div>
+	<div class="row footer">
+		<button class="btn  pull-right" id="yesBtnSubmit">Yes</button>
+		<button class="btn closeBtn  pull-right" id="noBtn">No</button>
+	</div>
+</div>
+<div id="warnMessagePopup" class="projectPopup">
+	<div class="row header">
+		<h3 class="pull-left">Alert</h3>
+		<span class="pull-right" id="close"></span>
+	</div>
+	<div class="row message"></div>
+	<div class="row footer">
+		<button class="btn closeBtn  pull-right" id="yesBtn">Ok</button>
+	</div>
+</div>
+<!-- Warnings on Admin console page -->
+
+
+<div id="reviewPopUp" class="projectPopup">
+	<div class="row header">
+		<h3 class="pull-left">Engineering Review</h3>
+		<span class="pull-right" id="close"></span>
+	</div> 
+	<div class="row oHidden">
+		<div class="col-md-4 col-sm-4 pull-left reviewDiv">
+			<div style="margin-bottom: 10px;"><span class="projNote">Fields marked with <b>*</b> are mandatory</span></div>
+			<!-- <label>Opportunity Details-General</label> -->
+			
+			<div class="row">
+				<div class="col-md-5 col-sm-5">
+					<label>Approver<sup>*</sup></label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<select name="approver" id="approver"  >
+						<option value="0">Select Approver</option>
+					</select>
+				</div>
+			</div>
+			<div class="row marginSet">
+				<div class="col-md-5 col-sm-5">
+					<label>Status<sup>*</sup></label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<select name="status" id="status"  >
+						<option value="0">Select Status</option>
+					</select>
+				</div>
+			</div>
+			<div class="row marginSet">
+				<div class="col-md-5 col-sm-5">
+					<label>Review Date<sup>*</sup></label>
+				</div>
+				<div class="col-md-7 col-sm-7 date">
+					<input autocomplete="new-password" type="text" id="reviewDate" name="reviewDate" disabled>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-5 col-sm-5">
+					<label>Notes<sup>*</sup></label>
+				</div>
+				<div class="col-md-7 col-sm-7 date">
+					<textarea rows="5" cols="50" id="notes" name="notes"></textarea>
+				</div>
+			</div>
+		</div>
+	</div>	
+	<div class="row footer" id="reviewMessages">
+	    <button class="btn   pull-right" id="closeBtn">Cancel</button>
+		<button class="btn   pull-right" id="saveReview">Save</button>
+		<span></span>
+	</div>
+</div>
+
+<div id="dispositionPopUp" class="projectPopup">
+	<div class="row header">
+		<h3 class="pull-left">Disposition</h3>
+		<span class="pull-right" id="close"></span>
+	</div> 
+	<div class="row message"></div>
+	<div class="row oHidden">
+		<div class="col-md-6 col-sm-6 pull-left leftContent">
+			<div style="margin-bottom: 10px;"><span class="projNote">Fields marked with <b>*</b> are mandatory</span></div>
+			<!-- <label>Opportunity Details-General</label> -->
+			
+			<div class="row">
+				<div class="col-md-5 col-sm-5">
+					<label>Quote Status<sup>*</sup></label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<select id="quoteStatus" name="quoteStatus">
+					    <option value="0">--Select Quote Status-- </option>
+						<option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
+                        <option value="Abandoned">Abandoned</option>
+                        <option value="Canceled">Canceled</option>
+                        <option value="Lost">Lost</option>
+                        <option value="Won">Won</option>
+					</select>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-5 col-sm-5">
+					<label>Reason</label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<select id="dispsReason" name="dispsReason[]" multiple>
+					<option value="0">--Select Reasons--</option>
+					</select>
+				</div>
+			</div>
+			<div class="row marginSet">
+				<div class="col-md-5 col-sm-5">
+					<label>CYCLONIXX&#174; WHD Model No.</label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<input autocomplete="new-password" type="text" id="whdModelNo" name="whdModelNo" disabled>
+				</div>
+			</div>
+			 <div class="row marginSet">
+				<div class="col-md-5 col-sm-5">
+					<label>Desander Model No.</label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<input autocomplete="new-password" type="text" id="desanderModelNo" name="desanderModelNo" disabled>
+				</div>
+			</div>
+			<div class="row marginSet">
+				<div class="col-md-5 col-sm-5">
+					<label>CYCLONIXX&#174; Deoiler Model No.</label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<input autocomplete="new-password" type="text" id="modelNo" name="modelNo" disabled>
+				</div>
+			</div>
+			<div class="row marginSet">
+				<div class="col-md-5 col-sm-5">
+					<label>Induced Gas Flotation Model No.</label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<input autocomplete="new-password" type="text" id="igfModelNo" name="igfModelNo" disabled>
+				</div>
+			</div>
+			 <div class="row marginSet">
+				<div class="col-md-5 col-sm-5">
+					<label>Nutshell Filter Model No.</label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<input autocomplete="new-password" type="text" id="nsfModelNo" name="nsfModelNo" disabled>
+				</div>
+			</div> 
+			<div class="row">
+				<div class="col-md-5 col-sm-5">
+					<label>Disposition Notes<sup>*</sup></label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<textarea rows="4" cols="50" id="dispNotes" name="dispNotes"></textarea>
+				</div>
+			</div>
+	
+		</div>
+		<div class="col-md-6 col-sm-6 pull-right rightContent">
+		<div class="row marginSet"  style="margin-top: 44px !important;">
+				<div class="col-md-5 col-sm-5 date">
+					<label id="poReceivedDateLabel">PO received Date</label>
+				</div>
+				<div class="col-md-7 col-sm-7 date">
+					<input autocomplete="new-password" type="text" id="poReceivedDate" name="poReceivedDate"  class="date datepicker">
+				</div>
+			</div>
+		<div class="row marginSet">
+				<div class="col-md-5 col-sm-5">
+					<label id="poNumberLabel">PO Number</label>
+				</div>
+				<div class="col-md-7 col-sm-7 date">
+					<input autocomplete="new-password" type="text" id="poNumber" name="poNumber">
+				</div>
+			</div>
+			<div class="row marginSet">
+				<div class="col-md-5 col-sm-5">
+					<label id="poAmountLabel">PO Amount (USD)</label>
+				</div>
+				<div class="col-md-7 col-sm-7 date">
+					<input autocomplete="new-password" type="number" id="poAmount" name="poAmount">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-5 col-sm-5">
+					<label id="poNotesLabel">PO Notes</label>
+				</div>
+				<div class="col-md-7 col-sm-7">
+					<textarea rows="4" cols="50" id="poNotes" name="poNotes"></textarea>
+				</div>
+			</div>
+			<div class="row marginSet">
+				<div class="col-md-5 col-sm-5">
+					<label id="poDeliveryDateLabel">Expected Delivery date</label>
+				</div>
+				<div class="col-md-7 col-sm-7 date">
+					<input autocomplete="new-password" type="text" id="expDeliveryDate" name="expDeliveryDate" class="date datepicker">
+				</div>
+			</div>
+			 
+			<div class="row marginSet">
+				<div class="col-md-5 col-sm-5">
+					<label>As sold Margin &#64;Regional Cost</label>
+				</div>
+				<div class="col-md-7 col-sm-7 date">
+					<input autocomplete="new-password" type="text" id="marginCost" name="marginCost" disabled>
+				</div>
+			</div>
+		</div>
+	</div>	
+	<div class="row footer" id="dispositionMsg">
+	    <button class="btn   pull-right" id="closeBtn">Cancel</button>
+		<button class="btn   pull-right" id="saveDisposition">Save</button>
+		<span></span>
+	</div>
+</div>
+
+<div id="addersPopUp" class="projectPopup">
+	<div class="row header">
+		<h3 class="pull-left">Adders</h3>
+		<span class="pull-right" id="close"></span>
+	</div> 
+	<div class="row oHidden linkPopUpContent">
+		<div class="adderTable">
+			<table>
+				<tr>
+					<th>Select</th>
+					<th colspan="2">Adders</th>
+				</tr>
+				<tr>
+					<td class="adderCheckbox"><input type="checkbox" id=""/></td>
+					<td>Water Outlet Control Valve</td>
+					<td>Remove</td>
+				</tr>
+				<tr>
+					<td class="adderCheckbox"><input type="checkbox" id=""/></td>
+					<td>Oil Reject Control Valve</td>
+					<td>Remove</td>
+				</tr>
+				<tr>
+					<td class="adderCheckbox"><input type="checkbox" id=""/></td>
+					<td>Programmable Logic Controller</td>
+					<td>Remove</td>
+				</tr>
+				<tr>
+					<td class="adderCheckbox"><input type="checkbox" id=""/></td>
+					<td>Water Outlet Control Valve Bypass Line</td>
+					<td>Add</td>
+				</tr>
+				<tr>
+					<td class="adderCheckbox"><input type="checkbox" id=""/></td>
+					<td>Oil Reject Control Valve Bypass Line</td>
+					<td>Add</td>
+				</tr>
+				<tr>
+					<td class="adderCheckbox"><input type="checkbox" id=""/></td>
+					<td>Inlet Sampling Point</td>
+					<td>Add</td>
+				</tr>
+				<tr>
+					<td class="adderCheckbox"><input type="checkbox" id=""/></td>
+					<td>Water Outlet Sampling Point</td>
+					<td>Add</td>
+				</tr>
+				<tr>
+					<td class="adderCheckbox"><input type="checkbox" id=""/></td>
+					<td>Oil Reject Sampling Point</td>
+					<td>Add</td>
+				</tr>
+				<tr>
+					<td class="adderCheckbox"><input type="checkbox" id=""/></td>
+					<td>Water Outlet Control Valve Isolation</td>
+					<td>Add</td>
+				</tr>
+				<tr>
+					<td class="adderCheckbox"><input type="checkbox" id=""/></td>
+					<td>Oil Reject Control Valve Isolation</td>
+					<td>Add</td>
+				</tr>
+				<tr>
+					<td class="adderCheckbox"><input type="checkbox" id=""/></td>
+					<td>Pressure Relief Valve Isolation</td>
+					<td>Add</td>
+				</tr>
+				<tr>
+					<td class="adderCheckbox"><input type="checkbox" id=""/></td>
+					<td>Single Block & Bleed Isolation for Instruments</td>
+					<td>Add</td>
+				</tr>
+				<tr>
+					<td class="adderCheckbox"><input type="checkbox" id=""/></td>
+					<td>Pressure Relief Valve</td>
+					<td>Remove</td>
+				</tr>
+				<tr>
+					<td class="adderCheckbox"><input type="checkbox" id=""/></td>
+					<td>Davit Arm for Vessel Access</td>
+					<td>Add</td>
+				</tr>
+				<tr>
+					<td class="adderCheckbox"><input type="checkbox" id=""/></td>
+					<td>Flow Transmitter</td>
+					<td>Add</td>
+				</tr>
+				<tr>
+					<td class="adderCheckbox"><input type="checkbox" id=""/></td>
+					<td>Oil in Water Analyser</td>
+					<td>Add</td>
+				</tr>
+			</table>
+		</div>
+		<span>*Trademark of SUEZ; may be registered in one or more countries.</span>
+	</div>
+	<div class="row footer">
+	    <button class="btn   pull-right" style="background-color: #87aad0 !important;font-weight: bolder !important;" id="closeBtn">Save & Continue</button>
+	</div>
+</div>
+
+
+<div class="vertical-menu hide">
+  <a href="#" id="openProject" class="active">Project <br><i class="fa fa-tasks" aria-hidden="true"></i></a>
+  <a id="spares" href="#">Spares <br><i class="fa fa-gear" aria-hidden="true"></i></a>
+  <a id="scope" href="#">Scope <br><i class="fa fa-crosshairs" aria-hidden="true"></i></a>
+  <a id="pricing" class="priceBtn" href="#">Pricing <br><i class="fa fa-usd" aria-hidden="true"></i></a>
+  <a id="quote" href="#">Quote <br><i class="fa fa-file-text" aria-hidden="true"></i></a>
+  <a id="review" href="#">Review <br><i class="fa fa-star" aria-hidden="true"></i></a>
+  <a id="disposition" href="#">Disposition <br><i class="fa fa-users" aria-hidden="true"></i>
+</a>
+</div>
+<div id="fluidProps" class="hide">
+	<table class="table table-bordered table-striped" id="fluidPropsTable">
+<!-- 		<thead><tr><th class="flowConditionClass headerAlign" style="width: 50% !important;">Fuild Property</th><th class="unitsClass headerAlign">Units</th><th class="headerAlign" style="width: 15% !important;">Value</th><th style="background-color:white !important;border:none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th></tr></thead> -->
+		 <thead><tr><th class="flowConditionClass headerAlign" style="width: 60% !important;">Fluid Properties</th><th class="unitsClass headerAlign" style="width: 18% !important;">Units</th><th class="headerAlign" style="width: 15% !important;">Value</th></tr></thead>
+		<tbody></tbody>
+	</table>
+	<div id="errorMsgFluidProps">
+	<ul  style="color: #E09F25;font-weight: bold;background-color:white !important;border:none;">
+	</ul>
+	</div>
+	
+	<button type="button" class="btn btn-default popUpBtn hide" id="proceedBtn_multiple" style="float: right;margin-right: 5px;" >Submit</button>
+</div>
+
+
+<div id="mainCanvas" class="canvasContainer hide active">
+	<div class="designTitle"><span><i>pE Configurator</i>  Canvas</span></div>
+	<div class="newTitle alert alert-info">Please click the below icons to custom design your application</div>
+	<div class="closeButton pull-right"></div>
+    <div class="hoverTextBox bottomArrow"></div>
+    <!-- <div class="demo statemachine-demo" id="statemachine-demo">
+    </div> -->
+    <div id="statemachineNewDemo" class="statemachineNewDemo">
+		<!-- <canvas id="newCanvas" width="1300px" height="590px">
+			Your browser does not support the HTML5 canvas tag.
+		</canvas>
+		<canvas id="dottedLineCan" width="50px" height="120px">Your browser does not support the HTML5 canvas tag.</canvas> -->
+		<img id="imgCanvas" usemap="#workmap" src="/products/assets/configurator/images/Canvas.png" alt="Canvas">
+		<map name="workmap">
+		  	<area shape="rect" class="deoilerBtn compBtn" data-comp="C00001" id="deoiler" coords="480,185,600,285" alt="" href="#linksPopUp">
+			<area shape="rect" class="deoilerBtn compBtn" data-comp="C00002" id="desander" coords="300,200,350,325" alt="" href="#desanderPopUp">
+			<!-- <area shape="rect" class="deoilerBtn compBtn" data-comp="C00003" id="whd" coords="60,70,90,170" alt="" href="#whdPopUp"> -->
+			<area shape="rect" class="deoilerBtn compBtn" data-comp="C00004" id="igf" coords="675,185,760,285" alt="" href="#igfPopUp">
+			<area shape="rect" class="deoilerBtn compBtn" data-comp="C00005" id="nsf" coords="900,200,930,310" alt="" href="#nsfPopUp">
+			<area style="cursor: not-allowed;" shape="rect" id="granularArea" coords="1040,200,1070,310" alt="" href="#linksPopUp">
+			<area style="cursor: not-allowed;" shape="rect" id="cartridgeArea" coords="1040,120,1070,180" alt="" href="#linksPopUp">
+			<area style="cursor: not-allowed;" shape="rect" id="ufArea" coords="1020,320,1080,380" alt="" href="#linksPopUp">
+			<area style="cursor: not-allowed;" shape="rect" id="backwashArea" coords="930,20,1000,80" alt="" href="#linksPopUp">
+			<area style="cursor: not-allowed;" shape="rect" id="seperatorArea" coords="150,50,210,90" alt="" href="#linksPopUp">
+			<area style="cursor: not-allowed;" shape="rect" id="desaltingArea" coords="280,100,370,150" alt="" href="#linksPopUp">
+			<area style="cursor: not-allowed;" shape="rect" id="inlineArea" coords="300,360,400,410" alt="" href="#linksPopUp">
+			<area style="cursor: not-allowed;" shape="rect" id="cpiArea" coords="420,360,480,410" alt="" href="#linksPopUp">
+			<area style="cursor: not-allowed;" shape="rect" id="chemicalArea" coords="550,340,610,410" alt="" href="#linksPopUp">
+			<!-- <area style="cursor: not-allowed;" shape="rect" id="boosterArea" coords="400,202,440,295" alt="" href="#linksPopUp"> -->
+		</map>
+				
+		<div class="canvas_checkbox dH"><input type="checkbox" class="canvas_check" data-comp="C00002" id="dH_checkbox" /></div>
+		<div class="canvas_checkbox deoling"><input type="checkbox" class="canvas_check" data-comp="C00001" id="deoling_checkbox"/></div>
+		<div class="canvas_checkbox iGF"><input type="checkbox" class="canvas_check" data-comp="C00004" id="iGF_checkbox" /></div>
+		<div class="canvas_checkbox nSF"><input type="checkbox" class="canvas_check" data-comp="C00005" id="nSF_checkbox" /></div>
+<!--    <div class="canvas_checkbox dH"><input type="checkbox" class="canvas_check" data-comp="C00002" id="dH_checkbox" /></div>-->		
+	 	<div class="canvas_checkbox wHD"><input type="checkbox" class="canvas_check" data-comp="C00003" id="wHD_checkbox" disabled /></div>		
+		<div class="canvas_checkbox bPump"><input type="checkbox" class="canvas_check" data-comp="C00009" id="bPump_checkbox" disabled /></div>		
+	</div>
+</div>
+<script>
+ require([
+        //'jquery',
+        'bootstrap-datepicker'
+    ], function(mo) {
+        $('.datepicker').datepicker().on('changeDate', function(ev){
+            $(this).datepicker('hide');
+        });
+    });
+ if(pathDesgnId != undefined && pathDesgnId != "" && pathDesgnId != null && pathDesgnId != "null"){
+	 		loadProjectDetails(false);		
+			shareDesIndex = "search";
+			selectedProjId = pathDesgnId.split("DC")[0];
+			shareDesId = pathDesgnId;
+			var loadProjTimer=window.setInterval(function(){
+				if(projects.length > 0){//Projects are loaded
+					clearInterval(loadProjTimer);
+					searchProjName = getProjName();
+					var projIndex = getprojIndex();
+					var designNum=-1;
+					$.each(projects,function(i){
+						if(this.projID==selectedProjId){
+							$.each(projects[i].designList,function(index){
+								if(this.projDesignId==shareDesId){
+									designNum=index;
+								}
+							});
+						}
+					})
+					technoId = projects[projIndex].designList[Number(designNum)].techId;
+					isExists = "Y";
+					pathDesgnId = "";
+					window.history.pushState("object or string", "Title", window.location.href.replace(window.location.href.substring(window.location.href.lastIndexOf('?') + 1).split("?")[0],"").replace("?",""));
+					//renderView('/products/designcloud/fsdHtml');
+				}
+			},300);
+		}
+</script>
